@@ -18,7 +18,10 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
+      "@elements": ["src/components/elements"],
+      "@hooks": ["src/components/hooks"],
       "@/*": ["./src/*"]
     }
   },

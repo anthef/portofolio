@@ -8,7 +8,7 @@ export const Desktop: React.FC = () => {
   return (
     <div className="w-full fixed py-5 z-50 bg-gradient-to-b from-primary to-primary/0">
       <div className="flex justify-between max-w-[80%] mx-auto items-center">
-        <Link href="#hero" className="flex items-center gap-5">
+        <Link href="#about" className="flex items-center gap-5">
           <Image
             src="/profile/icon.png"
             alt="logo"
@@ -16,7 +16,7 @@ export const Desktop: React.FC = () => {
             height={50}
             className="rounded-full icon-rotate"
           />
-          <p className="text-white font-bold text-xl font-sora">Anthony Edbert</p>
+          <p className="text-white font-bold text-xl font-sora">Anthony Edbert Feriyanto</p>
         </Link>
         
         <div className="flex gap-14">

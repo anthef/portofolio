@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 import { CONTACTS } from '@constants';
+import { FiDownload as Download } from 'react-icons/fi';
 
 export const Footer: React.FC = () => {
   return (
@@ -16,14 +17,14 @@ export const Footer: React.FC = () => {
           />
           <div className="flex flex-col gap-2">
             <div className="flex">
-              <h3 className="text-base md:text-lg lg:text-xl animate-slideUp">
+              <h3 className="text-base md:text-lg lg:text-xl shimmer-text">
                 © {new Date().getFullYear()} Anthony Edbert Feriyanto.
               </h3>
             </div>
-            <p className="text-xs md:text-sm lg:text-base text-gray-300 animate-slideUp delay-200">
+            <p className="text-xs md:text-sm lg:text-base text-gray-300 shimmer-text">
               All rights reserved
             </p>
-            <p className="text-xs md:text-sm lg:text-base text-gray-400 animate-slideUp delay-400">
+            <p className="text-xs md:text-sm lg:text-base text-gray-400">
               Created by{' '}
               <a
                 href=""
@@ -54,10 +55,11 @@ export const Footer: React.FC = () => {
           </div>
           <a
             href="/documents/cv.pdf"
-            download
-            className="px-4 py-2 md:px-6 md:py-3 bg-secondary text-white rounded-lg font-bold shadow-lg hover:bg-secondary-dark transition-all transform hover:scale-105 active:scale-95 border border-white text-sm md:text-base"
+            download="Anthony_Edbert_Feriyanto_CV.pdf"
+            className="flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 bg-secondary text-white rounded-lg font-bold shadow-lg hover:bg-secondary-dark transition-all transform hover:scale-105 active:scale-95 border border-white text-sm md:text-base"
           >
-            View CV
+            <Download size={20} className="mr-2" /> 
+            <span>View CV</span>
           </a>
         </div>
       </div>

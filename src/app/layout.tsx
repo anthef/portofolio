@@ -43,7 +43,7 @@ export default function RootLayout({
       </head>
       <body className={` ${manrope.variable} ${inter.variable} ${sora.variable} ${poppins.variable} bg-[#1B262C] w-screen flex flex-col min-h-screen`}>
         <Navbar />
-        <main className="flex-grow flex flex-col items-center w-full">
+        <main>
           {children}
         </main>
         <Footer />

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Poppins, Manrope, Sora } from "next/font/google";
 import "./globals.css";
-import { Navbar } from '@elements'
+import { Navbar, Footer } from '@elements'
 
 
 const manrope = Manrope({
@@ -34,17 +34,20 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en" className="scroll-smooth h-full">
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className={` ${manrope.variable} ${inter.variable} ${sora.variable} ${poppins.variable} bg-[#1B262C] w-screen flex flex-col items-center`}>
-        <Navbar />  
-        {children}
+      <body className={` ${manrope.variable} ${inter.variable} ${sora.variable} ${poppins.variable} bg-[#1B262C] w-screen flex flex-col min-h-screen`}>
+        <Navbar />
+        <main className="flex-grow flex flex-col items-center w-full">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
-  )
+  );
 }

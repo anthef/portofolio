@@ -38,8 +38,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={` ${manrope.variable} ${inter.variable} ${sora.variable} ${poppins.variable} bg-[#0f0615] w-screen flex flex-col justify-center items-center overflow-x-hidden`}>{children}
-        <Navbar />
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+      </head>
+      <body className={` ${manrope.variable} ${inter.variable} ${sora.variable} ${poppins.variable} bg-[#1B262C] w-screen flex flex-col items-center`}>
+        <Navbar />  
         {children}
       </body>
     </html>

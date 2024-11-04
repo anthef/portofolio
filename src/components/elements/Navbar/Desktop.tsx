@@ -9,12 +9,12 @@ export const Desktop: React.FC = () => {
     <div className="w-full fixed py-5 z-50 bg-gradient-to-b from-primary to-primary/0">
       <div className="flex justify-between max-w-[80%] mx-auto items-center">
         <Link href="#hero" className="flex items-center gap-5">
-          <Image
-            src="/assets/images/logo.jpg"
+        <Image
+            src="/profile/icon.png"
             alt="logo"
             width={50}
             height={50}
-            className="rounded-full"
+            className="rounded-full icon-rotate"
           />
           <p className="text-white font-bold text-xl">Anthony</p>
         </Link>

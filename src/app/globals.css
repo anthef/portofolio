@@ -60,23 +60,33 @@ h3 {
   transform: rotate(180deg); 
 }
 
-/* Pulse Animation */
 @keyframes pulse {
   0% {
-    color: #95f9c3;
-    background-color: #95f9c3;
+    color: #4ecca3;
+    background-color: #4ecca3;
+  }
+
+  25% {
+    color: #72d4e2;
+    background-color: #72d4e2;
   }
 
   50% {
-    color: #95d5f9;
-    background-color: #95d5f9;
+    color: #a49ae4;
+    background-color: #a49ae4;
+  }
+
+  75% {
+    color: #d5a6e4;
+    background-color: #d5a6e4;
   }
 
   100% {
-    color: #9795f9;
-    background-color: #9795f9;
+    color: #4ecca3;
+    background-color: #4ecca3;
   }
 }
+
 
 @keyframes shimmer {
   0% {

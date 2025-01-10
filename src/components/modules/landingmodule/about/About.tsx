@@ -1,139 +1,112 @@
-import { useWindowSize } from '@hooks';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React from 'react';
 import Typewriter from 'typewriter-effect';
 import { CONTACTS } from '@constants';
-import { motion, AnimatePresence } from 'framer-motion';
-import { FiEye as Eye, FiEyeOff as EyeOff, FiDownload as Download } from 'react-icons/fi';
+import { motion } from 'framer-motion';
+import { FiDownload as Download } from 'react-icons/fi';
+import SkillSlider from './SkillSlider';
 
 const About = () => {
-  const { width } = useWindowSize();
-  const [showContacts, setShowContacts] = useState(false);
-
-  const toggleContacts = () => {
-    setShowContacts((prev) => !prev);
-  };
-
-    return (
-        <div
-        className="flex pt-40 md:pt-0 md:min-h-screen items-center justify-center md:justify-between gap-8 text-center md:text-left"
+  return (
+    <div className="flex flex-col items-center justify-center mt-20 pt-20 md:pt-0 md:min-h-screen gap-8 text-center md:text-left ">
+      <div className="flex flex-col gap-6 lg:gap-8 z-10 justify-center items-center w-full md:w-2/3 max-w-4xl">
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.4 }}
+          className="text-3xl md:text-4xl lg:text-5xl font-bold text-white"
         >
-        <div className="flex flex-col gap-4 lg:gap-8 z-10" style={{ maxWidth: width > 768 ? '50%' : '100%' }}>
+          <span className="shine-text">
+            <Typewriter
+              options={{
+                strings: [
+                  'a Data Scientist',
+                  'a Full Stack Engineer',
+                ],
+                autoStart: true,
+                loop: true,
+              }}
+            />
+          </span>
+        </motion.div>
+        <div className="flex flex-col items-center justify-center gap-8 relative">
+          <div className="flex items-center justify-center w-full relative">
+     
+            <div className="w-1/3 hidden md:block relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/20 z-20" />
+              <div className="relative z-10">
+                <SkillSlider direction="left" speed={20} />
+              </div>
+            </div>
+            
+
             <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-            className="text-5xl md:text-6xl lg:text-[64px] leading-none font-bold"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1, delay: 0.3 }}
+              className="relative w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[250px] lg:h-[250px] overflow-hidden z-30 rounded-full border shadow-2xl"
             >
-            <span className="glowing-text-about">Hello Siri, I’m </span>
-            <span style={{ animation: 'pulse 5s ease infinite alternate' }}>
-                <Typewriter
-                options={{
-                    strings: [
-                    'Anthony Edbert',
-                    'a Data Scientist',
-                    'a Full Stack Engineer',
-                    ],
-                    autoStart: true,
-                    loop: true,
-                }}
-                />
-            </span>
+              <div className="absolute inset-0 ring-4 ring-white/10 rounded-full z-40" />
+              <Image
+                src="/profile/personal_photo2.png"
+                fill
+                alt="Self Portrait"
+                className="object-cover"
+              />
             </motion.div>
-
-            <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-            onClick={() => window.open('https://cs.ui.ac.id/', '_blank')}
-            className="bg-[#0B3866]/25 px-[30px] py-[15px] rounded-[30px] flex flex-col gap-8 text-left backdrop-blur-md shadow-xl w-full max-w-[450px] cursor-pointer hover:shadow-[#9BF6FF]/25 hover:shadow-2xl transition-all duration-300 ease-in-out"
-            >
-            <div className="flex gap-8">
-                <div className="relative w-24 h-24 self-center">
-                <Image
-                    src="/profile/fasilkom.png"
-                    alt="UI"
-                    fill
-                    priority
-                    className="rounded-full object-cover bg-white object-center shadow-lg shadow-[#9BF6FF]/25"
-                />
-                </div>
-                <div className="space-y-1">
-                <p className="text-sm md:text-lg font-bold">
-                    Undergraduate Information System
-                </p>
-                <p className="text-sm md:text-lg">University of Indonesia</p>
-                <p className="text-xs md:text-sm">2023-Present</p>
-                </div>
+            
+            <div className="w-1/3 hidden md:block relative">
+              <div className="absolute inset-0 bg-gradient-to-l from-transparent to-black/20 z-20" />
+              <div className="relative z-10">
+                <SkillSlider direction="right" speed={20} />
+              </div>
             </div>
-            </motion.div>
-
-            <div className="flex flex-col items-center md:items-start gap-4 mt-4">
-            <div className="flex gap-4">
-                <motion.button
-                onClick={toggleContacts}
-                whileHover={{ scale: 1.15 }}
-                whileTap={{ scale: 0.95 }}
-                className="flex items-center gap-2 px-4 py-2 bg-secondary text-white rounded-full hover:bg-secondary-dark transition-all"
-                >
-                {showContacts ? <EyeOff size={24} /> : <Eye size={24} />}
-                <span className="text-sm md:text-base font-semibold">Know Me More</span>
-                </motion.button>
-
-                <a
-                href="/documents/cv.pdf"
-                download="Anthony_Edbert_Feriyanto_CV.pdf"
-                className="flex items-center gap-2 px-4 py-2 bg-secondary text-white rounded-full hover:bg-secondary-dark hover:scale-115 active:scale-95 transition-all transform duration-300"
-                >
-                <Download size={24} />
-                <span className="text-sm md:text-base font-semibold">View CV</span>
-                </a>
-            </div>
-
-            <AnimatePresence>
-                {showContacts && (
-                <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.3 }}
-                    className="flex gap-5 justify-center md:justify-start mt-4"
-                >
-                    {CONTACTS.map((contact) => (
-                    <motion.a
-                        key={contact.name}
-                        href={contact.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        whileHover={{ scale: 1.75 }}
-                        className="flex items-center gap-2 transition-all cursor-pointer"
-                    >
-                        {contact.icon}
-                    </motion.a>
-                    ))}
-                </motion.div>
-                )}
-            </AnimatePresence>
-            </div>
+          </div>
         </div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.4 }}
+          className="px-6 py-3 rounded-lg border-2 border-secondary bg-[#0B3866]/25 backdrop-blur-md shadow-xl"
+        >
+          <span className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
+            Anthony Edbert Feriyanto
+          </span>
+        </motion.div>
 
         <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
-            className="z-10 hidden lg:flex lg:items-center overflow-hidden rounded-full border-4 border-[#0B3866]"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="flex gap-5 justify-center md:justify-start mt-4"
         >
-            <div className="relative w-[350px] h-[450px] rounded-full overflow-hidden">
-            <Image
-                src="/profile/personal_photo.jpg"
-                alt="self-portrait"
-                fill
-                className="object-cover"
-            />
-            </div>
+          {CONTACTS.map((contact) => (
+            <motion.a
+              key={contact.name}
+              href={contact.url}
+              target="_blank"
+              rel="noreferrer"
+              whileHover={{ scale: 1.75 }}
+              className="flex items-center gap-2 transition-transform transform"
+              aria-label={contact.name}
+            >
+              {contact.icon}
+            </motion.a>
+          ))}
         </motion.div>
-        </div>
-    );
+
+        <motion.a
+          href="/documents/cv.pdf"
+          download="Anthony_Edbert_Feriyanto_CV.pdf"
+          className="flex items-center gap-2 px-6 py-3 bg-secondary text-white rounded-full hover:bg-secondary-dark hover:scale-105 active:scale-95 transition-transform duration-300 mt-6"
+        >
+          <Download size={24} />
+          <span className="text-sm md:text-base font-semibold">Download CV</span>
+        </motion.a>
+      </div>
+    </div>
+  );
 };
 
 export default About;

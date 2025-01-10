@@ -41,7 +41,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className={` ${manrope.variable} ${inter.variable} ${sora.variable} ${poppins.variable} bg-[#1B262C] w-screen flex flex-col min-h-screen`}>
+      <body className={` ${manrope.variable} ${inter.variable} ${sora.variable} ${poppins.variable} bg-[#000F2B] w-screen flex flex-col min-h-screen`}>
         <Navbar />
         <main>
           {children}

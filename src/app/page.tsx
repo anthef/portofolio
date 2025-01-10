@@ -1,4 +1,5 @@
 import { LandingModule } from "@modules"
+import '../app/globals.css';
 
 export default function Home() {
   return (

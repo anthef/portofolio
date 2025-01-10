@@ -163,3 +163,22 @@ h3 {
   color: #ffffff; 
   animation: shine 2s infinite;
 }
+
+
+.blurry-gradient {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(52, 144, 197, 0.4) 0%, rgba(0, 15, 43, 0) 80%);
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+.blurry-gradient-2 {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(52, 144, 197, 0.6) 0%, rgba(0, 15, 43, 0) 90%);
+  filter: blur(100px);
+  pointer-events: none;
+}

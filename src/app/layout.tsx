@@ -28,6 +28,9 @@ const sora = Sora({
 export const metadata: Metadata = {
   title: "Anthony Edbert Feriyanto | Personal Website",
   description: "Anthony is currently 18 years old and also He is an Undergraduate Student at the Faculty of Computer Science, University of Indonesia. I am very passionate and interested in Artificial Intelligence and Software Development",
+  icons: {
+    icon: '/profile/icon.png',  
+  }
 };
 
 
@@ -39,7 +42,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth h-full">
       <head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/profile/icon.png" />
       </head>
       <body className={` ${manrope.variable} ${inter.variable} ${sora.variable} ${poppins.variable} bg-[#000F2B] w-screen flex flex-col min-h-screen relative`}>
         <div className="blurry-gradient" style={{ top: '20%', left: '10%' }}></div>

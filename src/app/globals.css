@@ -164,6 +164,11 @@ h3 {
   animation: shine 2s infinite;
 }
 
+.shine-text2 {
+  color: #f7f7f7; 
+  animation: shine 10000000000000s infinite;
+}
+
 
 .blurry-gradient {
   position: absolute;

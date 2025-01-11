@@ -17,13 +17,10 @@ export const Footer: React.FC = () => {
           />
           <div className="flex flex-col gap-2">
             <div className="flex">
-              <h3 className="text-base md:text-lg lg:text-xl shimmer-text">
-                © {new Date().getFullYear()} Anthony Edbert Feriyanto.
+              <h3 className="text-base md:text-md lg:text-md shimmer-text">
+                © {new Date().getFullYear()} Anthony Edbert Feriyanto. All rights reserved
               </h3>
             </div>
-            <p className="text-xs md:text-sm lg:text-base text-gray-300 shimmer-text">
-              All rights reserved
-            </p>
             <p className="text-xs md:text-sm lg:text-base text-gray-400">
               Created by{' '}
               <a
@@ -58,8 +55,8 @@ export const Footer: React.FC = () => {
             download="Anthony_Edbert_Feriyanto_CV.pdf"
             className="flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 bg-secondary text-white rounded-lg font-bold shadow-lg hover:bg-secondary-dark transition-all transform hover:scale-105 active:scale-95 border border-white text-sm md:text-base"
           >
-            <Download size={20} className="mr-2" /> 
-            <span>View CV</span>
+            <Download size={15} className="mr-2" /> 
+            <div className='text-xs'>View CV</div>
           </a>
         </div>
       </div>

@@ -12,10 +12,6 @@ export const NAV_ROUTES = [
         path: '#achievements',
     },
     {
-        name:'Skills',
-        path: '#skills',
-    },
-    {
         name: 'Projects',
         path: '#projects',
     },

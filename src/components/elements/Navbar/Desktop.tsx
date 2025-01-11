@@ -16,7 +16,6 @@ export const Desktop: React.FC = () => {
             height={50}
             className="rounded-full icon-rotate"
           />
-          <p className="text-white font-bold text-xl font-sora">Anthony Edbert Feriyanto</p>
         </Link>
         
         <div className="flex gap-14">

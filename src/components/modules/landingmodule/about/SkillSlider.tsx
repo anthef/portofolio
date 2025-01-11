@@ -20,7 +20,7 @@ const SkillSlider: React.FC<SkillSliderProps> = ({ direction = 'left', speed = 4
         {duplicatedSkills.map((skill, index) => (
           <div key={index} className="slider-item p-4">
             <a href={skill.link} target="_blank" rel="noreferrer" aria-label={skill.alt}>
-              <div className="bubble bg-[#24475B] rounded-lg shadow-white shadow-md w-20 h-20 flex items-center justify-center">
+              <div className="bubble bg-[#24475B] rounded-lg shadow-[#51C8D9] shadow-md w-20 h-20 flex items-center justify-center">
                 <Image
                   src={`/skills/${skill.image}`}
                   alt={skill.alt}

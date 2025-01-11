@@ -6,7 +6,7 @@ import { FiDownload as Download } from 'react-icons/fi';
 export const Footer: React.FC = () => {
   return (
     <>
-      <div className="flex w-full select-none flex-col items-center justify-between bg-primary py-4 px-5 md:flex-row md:py-8 md:px-16 animate-fadeIn">
+      <div className="flex w-full select-none flex-col items-center justify-between bg-primary py-4 px-5 md:flex-row md:py-8 md:px-16 animate-fadeIn bg-[#123655]">
         <div className="flex flex-col items-center justify-center text-center md:flex-row md:text-left gap-4 text-white max-w-full md:max-w-[60%] lg:max-w-[40%]">
           <Image
             src="/profile/icon.png"

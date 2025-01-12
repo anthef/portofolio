@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import About from './about/About'
+import Projects from './projects/Projects'
 
 export const LandingModule: React.FC = () => {
 
@@ -9,6 +10,10 @@ export const LandingModule: React.FC = () => {
       <div>
         <About />
       </div>
+      <div>
+        <Projects />
+      </div>
+
     </>
   )
 }

@@ -8,7 +8,7 @@ const ProjectCard = ({
   date,
   image,
   description,
-  skills,
+  skills = [],
   links,
 }: ProjectType) => {
   return (
@@ -16,7 +16,7 @@ const ProjectCard = ({
       {image && (
         <div className="relative w-full min-h-[300px]">
           <Image
-            src={`/assets/${image}`}
+            src={`/projects/${image}`}
             alt={name}
             fill
             priority
@@ -25,20 +25,30 @@ const ProjectCard = ({
         </div>
       )}
       <div className="flex gap-1 overflow-x-auto py-2">
-        {skills.map((skill) => (
-          <Chips
-            key={skill.name}
-            text={skill.name}
-            color={skill.color}
-            className="text-sm"
-            onClick={() => window.open(skill.link, '_blank')}
-          />
-        ))}
+        {skills.length > 0 ? (
+          skills.map((skill, idx) => {
+            if (!skill || !skill.name) {
+              console.warn(`Skill at index ${idx} is invalid:`, skill)
+              return null
+            }
+            return (
+              <Chips
+                key={skill.name}
+                text={skill.name}
+                color={skill.color}
+                className="text-sm"
+                onClick={() => window.open(skill.link, '_blank')}
+              />
+            )
+          })
+        ) : (
+          <p className="text-sm text-gray-500">No skills listed.</p>
+        )}
       </div>
       <h2>{name}</h2>
       <p className="text-sm md:text-lg">{date}</p>
       <p className="text-sm md:text-lg">{description}</p>
-      {links && (
+      {links && links.length > 0 && (
         <div className="flex flex-wrap gap-2 font-bold text-sm md:text-lg">
           Links:{' '}
           {links.map((link, idx) => (
@@ -55,7 +65,6 @@ const ProjectCard = ({
           ))}
         </div>
       )}
-      {/* <Button className="w-fit mx-auto">Test</Button> */}
     </div>
   )
 }

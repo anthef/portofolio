@@ -21,7 +21,7 @@ export const Footer: React.FC = () => {
                 © {new Date().getFullYear()} Anthony Edbert Feriyanto. All rights reserved
               </h3>
             </div>
-            <p className="text-xs md:text-sm lg:text-base text-gray-400">
+            <p className="text-xs md:text-sm lg:text-base text-white">
               Created by{' '}
               <a
                 href=""

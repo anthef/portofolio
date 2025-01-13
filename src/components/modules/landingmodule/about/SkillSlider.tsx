@@ -7,8 +7,8 @@ interface SkillSliderProps {
   speed?: number; 
 }
 
-const SkillSlider: React.FC<SkillSliderProps> = ({ direction = 'left', speed = 40 }) => { 
-  const duplicatedSkills = [...skillsList, ...skillsList];
+const SkillSlider: React.FC<SkillSliderProps> = ({ direction = 'left', speed = 20 }) => { 
+  const duplicatedSkills = [...skillsList];
   const animationName = direction === 'left' ? 'scroll-left' : 'scroll-right';
 
   return (

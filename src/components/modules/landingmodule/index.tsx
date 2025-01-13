@@ -9,11 +9,8 @@ export const LandingModule: React.FC = () => {
     <>
       <div>
         <About />
-      </div>
-      <div>
         <Projects />
       </div>
-
     </>
   )
 }

@@ -48,9 +48,13 @@ export default function RootLayout({
         <div className="blurry-gradient" style={{ top: '20%', left: '10%' }}></div>
         <div className="blurry-gradient-2" style={{ bottom: '10%', right: '15%' }}></div>
         <Navbar />
+        <div className="blurry-gradient" style={{ top: '40%', left: '30%' }}></div>
+        <div className="blurry-gradient-2" style={{ bottom: '20%', right: '15%' }}></div>
         <main>
           {children}
         </main>
+        <div className="blurry-gradient" style={{ top: '20%', left: '10%' }}></div>
+        <div className="blurry-gradient-2" style={{ bottom: '10%', right: '15%' }}></div>
         <Footer />
       </body>
     </html>

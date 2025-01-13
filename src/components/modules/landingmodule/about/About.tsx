@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import React from 'react';
 import Typewriter from 'typewriter-effect';
@@ -30,10 +31,10 @@ const About = () => {
             <div className="w-1/3 hidden md:block relative">
               <div className="flex flex-col absolute inset-0 bg-gradient-to-r from-transparent to-black/20 z-20" />
               <div className="relative z-10">
-                <SkillSlider direction="left" speed={40} />
+                <SkillSlider direction="left" speed={20} />
               </div>
               <div className="relative z-10">
-                <SkillSlider direction="right" speed={40} />
+                <SkillSlider direction="right" speed={20} />
               </div>
             </div>
 

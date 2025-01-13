@@ -26,7 +26,7 @@ const sora = Sora({
 })
 
 export const metadata: Metadata = {
-  title: "Anthony Edbert Feriyanto | Personal Website",
+  title: "Anthony's Portfolio",
   description: "Anthony is currently 18 years old and also He is an Undergraduate Student at the Faculty of Computer Science, University of Indonesia. I am very passionate and interested in Artificial Intelligence and Software Development",
   icons: {
     icon: '/profile/icon.png',  

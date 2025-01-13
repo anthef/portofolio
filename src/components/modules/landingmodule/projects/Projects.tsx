@@ -105,9 +105,9 @@ const Projects = () => {
       {selectedTag !== 0 && filteredProjects.length > 2 && (
         <button
           onClick={() => setSelectedTag(0)} 
-          className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
+          className="mt-4 px-4 py-2 bg-[#23314B] text-white rounded"
         >
-          See All Projects
+          Load More
         </button>
       )}
     </div>

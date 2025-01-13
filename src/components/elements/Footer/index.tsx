@@ -18,7 +18,7 @@ export const Footer: React.FC = () => {
           <div className="flex flex-col gap-2">
             <div className="flex">
               <h3 className="text-base md:text-md lg:text-md shimmer-text">
-                © {new Date().getFullYear()} Anthony Edbert Feriyanto. All rights reserved
+                {new Date().getFullYear()} Anthony Edbert Feriyanto. All rights reserved
               </h3>
             </div>
             <p className="text-xs md:text-sm lg:text-base text-white">

@@ -32,13 +32,12 @@ const ProjectCard = ({
               alt={name}
               fill
               priority
-              className="rounded-lg object-cover shadow-lg"
+              className="rounded-xl object-cover shadow-lg"
             />
           </div>
         </div>
       )}
       <div className="mt-24 md:mt-32 flex flex-col gap-3 md:gap-4">
-        {/* Skills Container with Horizontal Scroll if more than 2 */}
         <div
           className={`flex gap-1 md:gap-2 ${
             skills.length > 2
@@ -74,7 +73,6 @@ const ProjectCard = ({
         <h2 className="text-xl md:text-2xl font-bold text-center">{name}</h2>
         <p className="text-xs md:text-sm text-gray-200 text-center">{date}</p>
         
-        {/* Updated Description Styling */}
         <p className="text-sm md:text-base text-gray-300 text-left leading-relaxed max-w-full md:max-w-[90%] mx-auto">
           {description}
         </p>

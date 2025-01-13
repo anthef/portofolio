@@ -31,6 +31,6 @@ export interface Skill {
     // { image: 'ubuntu.svg', alt: 'Ubuntu', link: 'https://ubuntu.com/' },
     // { image: 'vitejs.svg', alt: 'Vite.js', link: 'https://vitejs.dev/' },
     // { image: 'vscode.svg', alt: 'Visual Studio Code', link: 'https://code.visualstudio.com/' },
-    { image: 'python.svg', alt: 'Python', link: 'https://www.python.org/' },
+    // { image: 'python.svg', alt: 'Python', link: 'https://www.python.org/' },
   ];
   

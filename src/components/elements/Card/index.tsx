@@ -1,6 +1,7 @@
 import React from 'react'
 import { props } from './interface'
 import ProjectCard from './ProjectCard'
+import ExperienceCard from './ExperienceCard'
 
 export const Card: React.FC<props> = ({ variant, props }) => {
   // TODO: Write element's logic
@@ -9,7 +10,7 @@ export const Card: React.FC<props> = ({ variant, props }) => {
     case 0:
       return <ProjectCard {...props} />
     case 1:
-      return null
+      return <ExperienceCard {...props} />
     default:
     //   return <AchievementCard {...props} />
         return null

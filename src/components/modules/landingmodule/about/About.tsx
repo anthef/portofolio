@@ -42,7 +42,7 @@ const About = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 1, delay: 0.3 }}
-              className="relative w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[250px] lg:h-[250px] overflow-hidden z-30"
+              className="relative w-[150px] h-[150px] md:w-[200px] md:h-[200px] lg:w-[350px] lg:h-[350px] overflow-hidden z-30"
             >
               <div className="absolute inset-0 rounded-full bg-primary opacity-70 animate-rotate">
                 <div className="absolute inset-0 rounded-full bg-gradient-to-t from-primary via-primary to-transparent opacity-50"></div>

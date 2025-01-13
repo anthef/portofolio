@@ -1,4 +1,5 @@
 export * from './contacts'
 export * from './achievements'
 export * from './projects'
-export * from './Skills'    
+export * from './Skills'  
+export * from './experience'  

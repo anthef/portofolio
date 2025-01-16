@@ -55,6 +55,12 @@ export const Ahli: SkillType = {
     link: 'https://flutter.dev/',
     color: '#02569B',
   },
+  Github : {
+    name: 'Github',
+    logo: '/skills/github.svg',
+    link: 'https://github.com/',
+    color: '#FFFF',
+  },
   Excel: {
     name: 'Excel',
     logo: '/skills/excel.svg',
@@ -63,7 +69,7 @@ export const Ahli: SkillType = {
   },
   Java: {
     name: 'Java',
-    logo: '/skills/java.svg',
+    logo: '/skills/java.png',
     link: 'https://www.java.com/',
     color: '#5382A1',
   },

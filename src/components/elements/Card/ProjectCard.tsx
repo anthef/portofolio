@@ -40,8 +40,8 @@ const ProjectCard = ({
       <div className="mt-24 md:mt-32 flex flex-col gap-3 md:gap-4">
         <div
           className={`flex gap-1 md:gap-2 ${
-            skills.length > 2
-              ? "flex-nowrap overflow-x-auto pr-2 scrollbar scrollbar-custom" // Added 'scrollbar-custom'
+            skills.length > 1
+              ? "flex-nowrap overflow-x-auto pr-2 scrollbar scrollbar-custom" 
               : "flex-wrap overflow-hidden"
           }`}
         >

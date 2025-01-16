@@ -21,7 +21,6 @@ export const Mobile: React.FC = () => {
             height={50}
             className="rounded-full icon-rotate"
           />
-          <p className="text-white font-bold text-xl font-sora">Anthony Edbert Feriyanto</p>
         </Link>
 
         <button onClick={toggleMenu} className="flex items-center text-white font-manrope">

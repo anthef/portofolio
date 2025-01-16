@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins, Manrope, Sora } from "next/font/google";
 import "./globals.css";
 import { Navbar, Footer } from '@elements'
+import { useWindowSize } from '@hooks';
 
 
 const manrope = Manrope({
@@ -38,23 +39,24 @@ export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
+  
 }>) {
   return (
     <html lang="en" className="scroll-smooth h-full">
       <head>
         <link rel="icon" href="/profile/icon.png" />
       </head>
-      <body className={` ${manrope.variable} ${inter.variable} ${sora.variable} ${poppins.variable} bg-[#000F2B] w-screen flex flex-col min-h-screen relative`}>
-        <div className="blurry-gradient" style={{ top: '20%', left: '10%' }}></div>
-        <div className="blurry-gradient-2" style={{ bottom: '10%', right: '15%' }}></div>
+      <body className={` ${manrope.variable} ${inter.variable} ${sora.variable} ${poppins.variable} bg-[#000F2B] items-center min-w-screen flex flex-col min-h-screen relative`}>
+        {/* <div className="blurry-gradient" style={{ top: '20%', left: '10%' }}></div>
+        <div className="blurry-gradient-2" style={{ bottom: '10%', right: '15%' }}></div> */}
         <Navbar />
-        <div className="blurry-gradient" style={{ top: '40%', left: '30%' }}></div>
-        <div className="blurry-gradient-2" style={{ bottom: '20%', right: '15%' }}></div>
+        {/* <div className="blurry-gradient" style={{ top: '40%', left: '30%' }}></div>
+        <div className="blurry-gradient-2" style={{ bottom: '20%', right: '15%' }}></div> */}
         <main>
           {children}
         </main>
-        <div className="blurry-gradient" style={{ top: '20%', left: '10%' }}></div>
-        <div className="blurry-gradient-2" style={{ bottom: '10%', right: '15%' }}></div>
+        {/* <div className="blurry-gradient" style={{ top: '20%', left: '10%' }}></div>
+        <div className="blurry-gradient-2" style={{ bottom: '10%', right: '15%' }}></div> */}
         <Footer />
       </body>
     </html>

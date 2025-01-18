@@ -18,7 +18,7 @@ const AboutMobile = () => {
           <span className="shine-text">
             <Typewriter
               options={{
-                strings: ['AFBAEJNDA', 'LAMO PLAAOPNOIWDA'],
+                strings: ['A Full Stack Engineer', 'a Data Scientist'],
                 autoStart: true,
                 loop: true,
               }}

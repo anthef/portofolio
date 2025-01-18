@@ -1,10 +1,12 @@
 import { AchievementType } from './interface'
+import { Ahli } from '../Skills'
+
 export const ACHIEVEMENTS: AchievementType[] = [
   {
     name: '1st Winner of Data Mining, GEMASTIK XVII',
     issuer:
       'Indonesian Ministry of Education, Culture, Research, and Technology',
-    image: 'images/achievements/gemastik/image20241.jpg',
+    image: 'coming_soon.png',
     date: 'Sep 2024',
     medal: 'gold',
     description:
@@ -27,12 +29,14 @@ export const ACHIEVEMENTS: AchievementType[] = [
         link: 'https://www.youtube.com/watch?v=lhh2fzNPjAQ',
       },
     ],
+    skills : [Ahli.Python],
+    jenjang : 'university'
   },
   {
     name: '2nd Winner of Big Data Challenge, Satria Data 2024',
     issuer:
       'Indonesian Ministry of Education, Culture, Research, and Technology',
-    image: 'images/achievements/satria data/image20241.jpg',
+    image: 'coming_soon.png',
     date: 'Aug 2024',
     medal: 'silver',
     description:
@@ -55,11 +59,13 @@ export const ACHIEVEMENTS: AchievementType[] = [
         link: 'https://www.youtube.com/watch?v=QkouQSzCLLw',
       },
     ],
+    skills : [Ahli.Python],
+    jenjang : 'university'
   },
   {
     name: '1st Winner of Machine Learning Competition, Data Slayer 1.0',
     issuer: 'Telkom Institute of Technology Purwokerto',
-    image: 'images/achievements/data slayer/image1.jpg',
+    image: 'coming_soon.png',
     date: 'Jan 2024',
     medal: 'gold',
     description:
@@ -78,11 +84,13 @@ export const ACHIEVEMENTS: AchievementType[] = [
         link: 'https://www.youtube.com/watch?v=f96Me544C4Y&pp=ygUPZGF0YSBzbGF5ZXIgMS4w',
       },
     ],
+    skills : [Ahli.Python],
+    jenjang : 'university'
   },
   {
     name: '1st Winner of Objective Quest Dataquest, Airnology 2.0',
     issuer: 'BEM FTMM Universitas Airlangga',
-    image: 'images/achievements/dataquest/image1.jpg',
+    image: 'coming_soon.png',
     date: 'Oct 2023',
     medal: 'gold',
     description:
@@ -101,11 +109,13 @@ export const ACHIEVEMENTS: AchievementType[] = [
         link: 'https://www.youtube.com/watch?v=6r7BY68tc7g&t=17557s&pp=ygUNYWlybm9sb2d5IDIuMA%3D%3D',
       },
     ],
+    skills : [Ahli.Python],
+    jenjang : 'university'
 },
   {
     name: '2nd Winner of Natural Language Processing Data Competition, Intelligo ID 2023',
     issuer: 'Intelligo ID',
-    image: 'images/achievements/intelligo/image1.jpg',
+    image: 'coming_soon.png',
     date: 'Oct 2023',
     medal: 'silver',
     description:
@@ -120,14 +130,16 @@ export const ACHIEVEMENTS: AchievementType[] = [
         link: 'https://drive.google.com/file/d/1eNNhNaFVrr3KoQ-EtZogt6qFkRJPzDis/view?usp=drive_link',
       },
     ],
+    skills : [Ahli.Python],
+    jenjang : 'university'
   },
   {
     name: 'Finalist of Data Mining, GEMASTIK XVI',
     issuer:
       'Indonesian Ministry of Education, Culture, Research, and Technology',
-    image: 'images/achievements/gemastik/image1.jpeg',
+    image: 'coming_soon.png',
     date: 'Sep 2023',
-    medal: 'none',
+    medal: 'unranked',
     description:
       'Conducted a computer vision research project, utilizing CCTVs to create our own dataset. The objective of our study was to develop a paper titled "Helm Detection on Motorcycle Drivers in Indonesia using Deformable DETR".',
     links: [
@@ -144,14 +156,16 @@ export const ACHIEVEMENTS: AchievementType[] = [
         link: 'https://drive.google.com/file/d/18MH45PhX9VFLr8l_xDwbadrw-lkQ-Avj/view?usp=sharing',
       },
     ],
+    skills : [Ahli.Python],
+    jenjang : 'university'
   },
   {
     name: 'Semi-Finalist of Big Data Competition, Satria Data 2023',
     issuer:
       'Indonesian Ministry of Education, Culture, Research, and Technology',
-    image: 'images/achievements/satria data/image1.png',
+    image: 'coming_soon.png',
     date: 'Sep 2023',
-    medal: 'none',
+    medal: 'unranked',
     description:
       'Our team, Three Outliers, successfully ranked in the top 10 by utilizing a fine-tuned model and Faster RCNN to develop an OCR for detecting Indonesian car plate numbers.',
     links: [
@@ -160,11 +174,14 @@ export const ACHIEVEMENTS: AchievementType[] = [
         link: 'https://pusatprestasinasional.kemdikbud.go.id/uploads/lampiran/Pengumuman%20semifinalis%20Satria%20Data%20-%20BDC.pdf',
       },
     ],
+    skills : [Ahli.Python],
+    jenjang : 'university',
+
   },
   {
     name: '2nd Winner of Data Competition, JOINTS 2023',
     issuer: 'HIMAKOM Universitas Gadjah Mada',
-    image: 'images/achievements/joints/image1.jpeg',
+    image: 'coming_soon.png',
     date: 'May 2023',
     medal: 'silver',
     description:
@@ -183,11 +200,13 @@ export const ACHIEVEMENTS: AchievementType[] = [
         link: 'https://drive.google.com/file/d/1VB5BHvBtEEx5lG7NSctTJzyiKtSeqvZg/view?usp=drive_link',
       },
     ],
+    skills : [Ahli.Python],
+    jenjang : 'university'
   },
   {
     name: '2nd Winner of RISTEK Datathon Competition, Pekan RISTEK 2022',
     issuer: 'RISTEK Fasilkom UI',
-    image: 'images/achievements/datathon/image1.jpg',
+    image: 'coming_soon.png',
     date: 'Dec 2022',
     medal: 'silver',
     description:
@@ -206,5 +225,7 @@ export const ACHIEVEMENTS: AchievementType[] = [
         link: 'https://drive.google.com/file/d/1DMiMpirMe6TsKo_pR5QRJywOwKQJYVga/view?usp=drive_link',
       },
     ],
+    skills : [Ahli.Python],
+    jenjang : 'university'
   },
 ]

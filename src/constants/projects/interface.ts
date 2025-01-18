@@ -8,6 +8,7 @@ export interface ProjectType {
     links?: LinkType[]
     type: 'AI' | 'SE' | 'All'
     skills : SkillSet[]
+    
   }
   
   interface LinkType {

@@ -4,12 +4,12 @@ export const NAV_ROUTES = [
         path:'#about',
     },
     {
-        name: 'Experiences',
-        path: '#experiences',
-    },
-    {
         name: 'Achievements',
         path: '#achievements',
+    },
+    {
+        name: 'Experiences',
+        path: '#experiences',
     },
     {
         name: 'Projects',

@@ -4,6 +4,10 @@ export const NAV_ROUTES = [
         path:'#about',
     },
     {
+        name: 'Education',
+        path : '#education',
+    },
+    {
         name: 'Achievements',
         path: '#achievements',
     },

@@ -187,3 +187,162 @@ h3 {
   filter: blur(100px);
   pointer-events: none;
 }
+
+
+/* globals.css */
+
+/* Styling for Education Section */
+.education-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+
+  align-items: center;
+  padding: 5rem 2rem 5rem;
+  z-index: 10;
+}
+
+.education-title {
+  background-image: linear-gradient(to right, #348B96, #2A717A, #24475B, #24475B);
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 10px 15px rgba(0, 0, 0, 0.2),
+    0 20px 25px rgba(0, 0, 0, 0.15),
+    0 30px 35px rgba(0, 0, 0, 0.1);
+  border: 2px solid #24475B;
+  border-radius: 9999px;
+  outline: 3px solid rgba(36, 71, 91, 0.5);
+  padding: 1.5rem 2rem;
+  backdrop-filter: blur(10px);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.education-title-text {
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+}
+
+.education-slider {
+  width: 100%;
+  max-width: 1200px;
+  padding: 50px;
+}
+
+.education-slide {
+  padding: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.column-left, .column-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 35%;
+  background-color: #011946;
+  height: 300px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 15px rgba(0, 206, 255, 1), 0 0 30px rgba(0, 206, 255, 0.8);
+  border-radius: 20px 20px 0 0;
+  border-bottom: none;
+  transition: all 0.3s ease-in-out;
+  top:-5px;
+}
+
+.column-left {
+  transform: perspective(1000px) rotateY(-15deg);
+  z-index :-1;
+}
+
+.column-right {
+  transform: perspective(1000px) rotateY(15deg);
+  z-index: -1;
+}
+
+/* Shine Effect for Center Column */
+.column-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 50%;
+  height: 350px;
+  background-color: #123655;
+  border-radius: 20px 20px 0 0;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 25px rgba(0, 206, 255, 0.8), 0 0 50px rgba(0, 206, 255, 0.5);
+  transition: all 0.3s ease-in-out;
+  translate: 0;
+}
+
+/* Styling for swiper buttons */
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background-color: #ffffff;
+  color: white;
+  padding: 15px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin: 0 20px;
+}
+
+.swiper-button-prev {
+  left: 0;
+}
+
+.swiper-button-next {
+  right: 0;
+}
+
+.content {
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column; /* Atur elemen dalam kolom */
+  justify-content: center; /* Tengah secara vertikal */
+  align-items: center; /* Tengah secara horizontal */
+  padding: 20px;
+  height: 100%; /* Pastikan mengambil seluruh tinggi kontainer induk */
+}
+
+.content-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.content-institution {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.content-year {
+  font-size: 0.9rem;
+  color: #f1f1f1;
+  font-weight: 300;
+}
+
+.education-image {
+  width: 70%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px; /* Tambahkan jarak antara gambar dan teks */
+}
+
+
+
+
+
+
+
+

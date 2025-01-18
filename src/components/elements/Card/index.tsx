@@ -3,6 +3,7 @@ import { props } from './interface'
 import ProjectCard from './ProjectCard'
 import ExperienceCard from './ExperienceCard'
 import ExperienceMobileCard from './ExperienceMobileCard'
+import ProjectMobileCard from './ProjectMobileCard'
 
 export const Card: React.FC<props> = ({ variant, props }) => {
 
@@ -13,6 +14,8 @@ export const Card: React.FC<props> = ({ variant, props }) => {
       return <ExperienceCard {...props} />
     case 2:
       return <ExperienceMobileCard {...props} />
+    case 3 : 
+      return <ProjectMobileCard {...props} />
     
   }
 }

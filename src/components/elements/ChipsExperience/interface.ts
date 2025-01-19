@@ -3,9 +3,9 @@ export interface Props {
     onClick?: (e:any) => void; 
     enabled?: boolean;
     className?: string;
-    leftIcon?: React.ReactNode; 
-    rightIcon?: React.ReactNode;
+    leftIcon?: string; 
+    rightIcon?: string;
     text: string;
-    color: string;
+    color?: string;
   }
   

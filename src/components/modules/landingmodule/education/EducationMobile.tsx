@@ -36,7 +36,7 @@ const educationHistory = [
 ];
 
 const EducationMobile = () => {
-  const [activeSlide, setActiveSlide] = useState(0);
+  const [, setActiveSlide] = useState(0);
   useEffect(() => {
   }, []);
 

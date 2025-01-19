@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Poppins, Manrope, Sora } from "next/font/google";
 import "./globals.css";
 import { Navbar, Footer } from '@elements'
-import { useWindowSize } from '@hooks';
 
 
 const manrope = Manrope({

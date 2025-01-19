@@ -52,6 +52,7 @@ const ExperiencesMobile = () => {
 
       <div className="relative z-20 w-full max-w-7xl flex flex-col items-center">
         {EXPERIENCES[experienceMap[selectedTag]].map((experience, index) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const isLast =
             index === EXPERIENCES[experienceMap[selectedTag]].length - 1
 

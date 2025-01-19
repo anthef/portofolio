@@ -8,7 +8,6 @@ export const ChipsExperience: React.FC<Props> = ({
   leftIcon,
   rightIcon,
   text,
-  color = '#000000',
 }) => {
 
   return (

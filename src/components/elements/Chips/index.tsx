@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React from 'react'
 import { Props } from './interface'
 
@@ -8,7 +9,6 @@ export const Chips: React.FC<Props> = ({
   leftIcon,
   rightIcon,
   text,
-  color = '#000000',
 }) => {
 
   return (

@@ -28,7 +28,7 @@ const ProjectsMobile = () => {
   }, [selectedTag])
 
   const displayedProjects =
-    selectedTag === 0 ? filteredProjects : filteredProjects.slice(0, 2)
+    selectedTag === 0 ? filteredProjects : filteredProjects.slice(0, 10)
   const gridColumns =
     selectedTag === 0 ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1 md:grid-cols-2"
 
@@ -102,7 +102,7 @@ const ProjectsMobile = () => {
         ))}
       </motion.div>
 
-      {selectedTag !== 0 && filteredProjects.length > 2 && (
+      {selectedTag !== 0 && filteredProjects.length > 10 && (
         <button
           onClick={() => setSelectedTag(0)} 
           className="mt-4 px-4 py-2 bg-[#23314B] text-white rounded"

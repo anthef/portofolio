@@ -92,7 +92,7 @@ const AboutDesktop = () => {
                 relative
             "
             >
-            <span className="text-2xl md:text-2xl lg:text-3xl font-medium text-white">
+            <span className="text-2xl md:text-2xl lg:text-3xl font-medium text-white font-poppins">
                 Anthony Edbert Feriyanto
             </span>
             </motion.div>

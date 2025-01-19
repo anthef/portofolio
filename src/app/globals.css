@@ -189,9 +189,6 @@ h3 {
 }
 
 
-/* globals.css */
-
-/* Styling for Education Section */
 .education-container {
   display: flex;
   flex-direction: column;
@@ -220,7 +217,7 @@ h3 {
 }
 
 .education-title-text {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 600;
   color: white;
   text-align: center;
@@ -228,7 +225,7 @@ h3 {
 
 .education-slider {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1800px;
   padding: 50px;
 }
 
@@ -251,7 +248,7 @@ h3 {
   border-radius: 20px 20px 0 0;
   border-bottom: none;
   transition: all 0.3s ease-in-out;
-  top:-5px;
+  top:-9px;
 }
 
 .column-left {
@@ -264,23 +261,21 @@ h3 {
   z-index: -1;
 }
 
-/* Shine Effect for Center Column */
+
 .column-center {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  width: 50%;
-  height: 350px;
+  width: 30%;
+  height: 400px;
   background-color: #123655;
   border-radius: 20px 20px 0 0;
   overflow: hidden;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 25px rgba(0, 206, 255, 0.8), 0 0 50px rgba(0, 206, 255, 0.5);
   transition: all 0.3s ease-in-out;
-  translate: 0;
 }
 
-/* Styling for swiper buttons */
 .swiper-button-prev,
 .swiper-button-next {
   position: absolute;
@@ -308,36 +303,42 @@ h3 {
   color: white;
   text-align: center;
   display: flex;
-  flex-direction: column; /* Atur elemen dalam kolom */
-  justify-content: center; /* Tengah secara vertikal */
-  align-items: center; /* Tengah secara horizontal */
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center; 
   padding: 20px;
-  height: 100%; /* Pastikan mengambil seluruh tinggi kontainer induk */
+  height: 100%; 
 }
 
 .content-title {
   margin: 0;
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
 }
 
 .content-institution {
-  font-size: 1rem;
+  font-size: 1.2rem;
   margin: 10px 0;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
 }
 
 .content-year {
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   color: #f1f1f1;
-  font-weight: 300;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
 }
-
 .education-image {
   width: 70%;
   height: auto;
   border-radius: 8px;
-  margin-bottom: 20px; /* Tambahkan jarak antara gambar dan teks */
+  margin-bottom: 20px;
+  object-fit: cover;
 }
+
+
 
 
 

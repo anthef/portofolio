@@ -15,6 +15,7 @@ const ProjectCard = ({
   description,
   skills = [],
   links,
+  collaborators
 }: ProjectType) => {
   return (
     <motion.div
@@ -96,6 +97,23 @@ const ProjectCard = ({
                 </span>
               );
             })}
+          </div>
+        )}
+        {collaborators && (
+          <div className="flex flex-wrap gap-2 font-normal text-sm md:text-md">
+            Collabs:{' '}
+            {collaborators.map((person, idx) => (
+              <span className="text-secondary underline" key={idx}>
+                <a
+                  href={person.link}
+                  className="font-r-flex font-normal"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {person.name}
+                </a>
+              </span>
+            ))}
           </div>
         )}
       </div>

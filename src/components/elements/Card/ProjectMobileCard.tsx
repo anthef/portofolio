@@ -15,6 +15,7 @@ const ProjectMobileCard = ({
   description,
   skills = [],
   links,
+  collaborators
 }: ProjectType) => {
   return (
     <motion.div
@@ -76,7 +77,7 @@ const ProjectMobileCard = ({
         </p>
 
         {links && links.length > 0 && (
-          <div className="flex flex-wrap justify-center gap-1 md:gap-2 font-bold text-xs md:text-base">
+          <div className="flex flex-wrap justify-center gap-1 md:gap-2 font-bold text-xs md:text-lg">
             {links.map((link, idx) => {
               const IconComponent =
                 linkIconMapping[link.name] || FaExternalLinkAlt;
@@ -94,9 +95,27 @@ const ProjectMobileCard = ({
                 </span>
               );
             })}
+            {collaborators && (
+              <div className="flex flex-wrap gap-2 font-normal text-sm md:text-md">
+                Collabs:{' '}
+                {collaborators.map((person, idx) => (
+                  <span className="text-secondary underline" key={idx}>
+                    <a
+                      href={person.link}
+                      className="font-r-flex font-normal"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {person.name}
+                    </a>
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         )}
       </div>
+      
     </motion.div>
   );
 };

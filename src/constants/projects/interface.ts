@@ -8,10 +8,16 @@ export interface ProjectType {
     links?: LinkType[]
     type: 'AI' | 'SE' | 'All'
     skills : SkillSet[]
+    collaborators?: Collaborator[]
     
   }
   
   interface LinkType {
     name: string
     link: string
+  }
+
+  interface Collaborator {
+    name : string
+    link : string
   }

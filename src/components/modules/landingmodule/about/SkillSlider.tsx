@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import { skillsList } from './skillsList';
+import { skillsList } from './skillslist';
 
 interface SkillSliderProps {
   direction?: 'left' | 'right';

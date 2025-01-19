@@ -54,7 +54,7 @@ const AchievementMobile = () => {
 
   // Determine the projects to display based on selected tag
   const displayedProjects =
-    selectedTag === 0 ? filteredAchievement : filteredAchievement.slice(0, 2)
+    selectedTag === 0 ? filteredAchievement : filteredAchievement.slice(0, 20)
   const gridColumns =
     selectedTag === 0 ? "grid-cols-1 md:grid-cols-2 lg:grid-cols-3" : "grid-cols-1 md:grid-cols-2"
 
@@ -138,7 +138,7 @@ const AchievementMobile = () => {
         ))}
       </motion.div>
 
-      {selectedTag !== 0 && filteredAchievement.length > 2 && (
+      {selectedTag !== 0 && filteredAchievement.length > 20 && (
         <button
           onClick={() => setSelectedTag(0)}
           className="mt-4 px-4 py-2 bg-[#23314B] text-white rounded"

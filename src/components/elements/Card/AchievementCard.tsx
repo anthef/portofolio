@@ -52,7 +52,7 @@ const AchievementCard = ({
         <p className="text-sm md:text-lg">{description}</p>
         {links && (
           <div className="flex flex-wrap gap-2 font-bold text-sm md:text-lg">
-            Links:{' '}
+            {' '}
             {links.map((link, idx) => (
               <span className="text-secondary underline" key={idx}>
                 <a

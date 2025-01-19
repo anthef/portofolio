@@ -93,7 +93,7 @@ const OrgExperience: SingularExperienceType[] = [
     location: 'Jakarta, Indonesia',
     roles: [
       {
-        name: 'Staff of Public Relation',
+        name: 'Head of Equipment and Mechanical',
         date: 'Oct 2022 - Oct 2023',
         description: [
         

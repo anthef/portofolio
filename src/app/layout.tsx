@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Poppins, Manrope, Sora } from "next/font/google";
 import "./globals.css";
 import { Navbar, Footer } from '@elements'
+import { Analytics } from '@vercel/analytics/next';
 
 
 const manrope = Manrope({
@@ -53,6 +54,7 @@ export default function RootLayout({
         <div className="blurry-gradient-2" style={{ bottom: '20%', right: '15%' }}></div> */}
         <main>
           {children}
+          <Analytics/>
         </main>
         {/* <div className="blurry-gradient" style={{ top: '20%', left: '10%' }}></div>
         <div className="blurry-gradient-2" style={{ bottom: '10%', right: '15%' }}></div> */}

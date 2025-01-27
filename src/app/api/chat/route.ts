@@ -49,12 +49,12 @@ Computer Science student at Universitas Indonesia with expertise in mobile devel
 
 **Education**:
 - B.S. Computer Science, Universitas Indonesia (2023-Present)
-  - GPA: 3.89/4.00
+  - GPA: 4.00/4.00
   - Coursework: Algorithms, ML, Distributed Systems
 
 - SMAN 28 Jakarta (2019-2022)
-  - Ranked 2nd in graduating class
-  - Robotics Club Head
+  - Ranked 2nd in Graduating class
+  - Robotics Club Mechanical and Equipment Division Head
 
 **Leadership**:
 - Staff of Data Science Academy @ COMPFEST 16
@@ -66,7 +66,7 @@ Computer Science student at Universitas Indonesia with expertise in mobile devel
 - GitHub: [github.com/anthef](https://github.com/anthef)
 - LinkedIn: [linkedin.com/in/anthony-edbert-feriyanto](https://www.linkedin.com/in/anthony-edbert-feriyanto)
 - Kaggle: [kaggle.com/anthonyferiyanto](https://www.kaggle.com/anthonyferiyanto)
-- Portfolio: [anthonyedbert.vercel.app](https://anthonyedbert.vercel.app)
+- Portfolio: [anthonyedbert.vercel.app](https://anthonyef.website/)
 `;
 
 const createPrompt = (message: string, userLanguage: string, isFirst: boolean) => `
@@ -98,7 +98,6 @@ const detectLanguage = (text: string) => {
     if (pattern.test(text)) return lang;
   }
 
-  // Check for language patterns
   const langPatterns = {
     en: /\b(the|is|to|what|how)\b/i,
     id: /\b(saya|apa|bagaimana)\b/i,
@@ -112,7 +111,7 @@ const detectLanguage = (text: string) => {
     if (pattern.test(text)) return lang;
   }
 
-  return 'en'; // Default to English
+  return 'en'; 
 };
 
 export async function POST(request: Request) {
@@ -143,15 +142,12 @@ export async function POST(request: Request) {
     const result = await model.generateContent(prompt);
     let text = result.response.text();
 
-    // Remove greetings for follow-up messages
     if (!isFirstMessage) {
       text = text.replace(
         /^(Hai!|Hi|¡Hola!|こんにちは|你好|안녕|مرحبا|Привет|Bonjour|Hallo|Olá)\s*/i, 
         ''
       );
     }
-
-    // RTL text formatting
     if (['ar', 'he'].includes(userLanguage)) {
       text = text.split('\n').join('\n<br>');
     }

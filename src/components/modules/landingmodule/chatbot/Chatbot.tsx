@@ -137,7 +137,7 @@ export default function ChatBot() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen items-center justify-center gap-6 z-10 py-20 md:py-40 px-4">
+    <div id='chat' className="flex flex-col min-h-screen items-center justify-center gap-6 z-10 py-20 md:py-40 px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

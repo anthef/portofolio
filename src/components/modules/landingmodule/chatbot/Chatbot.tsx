@@ -429,7 +429,7 @@ export default function ChatBot() {
                   <ImagePlus className="w-5 h-5 md:w-6 md:h-6 text-gray-600" />
                 </label>
 
-                <label className="p-1 md:p-2rounded-full hover:bg-gray-400 transition-colors shrink-0 md:hidden bg-gray-400 cursor-not-allowed">
+                <label className="p-1 md:p-2 rounded-full hover:bg-gray-400 transition-colors shrink-0 md:hidden bg-gray-400 cursor-not-allowed">
                   <input
                     type="file"
                     accept="image/*"

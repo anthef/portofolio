@@ -66,7 +66,7 @@ Computer Science student at Universitas Indonesia with expertise in mobile devel
 - GitHub: [github.com/anthef](https://github.com/anthef)
 - LinkedIn: [linkedin.com/in/anthony-edbert-feriyanto](https://www.linkedin.com/in/anthony-edbert-feriyanto)
 - Kaggle: [kaggle.com/anthonyferiyanto](https://www.kaggle.com/anthonyferiyanto)
-- Portfolio: [anthonyedbert.vercel.app](https://anthonyef.website/)
+- Portfolio: [anthonyef.website](https://anthonyef.website/)
 `;
 
 const createPrompt = (message: string, userLanguage: string, isFirst: boolean) => `
@@ -75,12 +75,18 @@ ${isFirst ? `[FIRST MESSAGE] Start with SHORT greeting in ${userLanguage} (max 5
 **Context**: ${PROFESSIONAL_CONTEXT}
 
 **Strict Rules**:
-1. ${isFirst ? 'Include greeting' : 'NO greeting repetition'}
-2. Respond in EXACTLY THE SAME LANGUAGE as the current query
-3. Keep technical terms in English (e.g., "Flutter", "TensorFlow")
-4. Use 0-1 relevant emoji
-5. give a human-like response and always to give a response that is relevant to the context
-6. also give some additional information to make the conversation more interesting
+1. Your responsibility is to be my assistant in answering user queries including technical and non-technical questions
+2. ${isFirst ? 'Include greeting' : 'NO greeting repetition'}
+3. Respond in EXACTLY THE SAME LANGUAGE as the current query
+4. Keep technical terms in English (e.g., "Flutter", "TensorFlow")
+5. Use 0-1 relevant emoji
+6. give a human-like response and always to give a response that is relevant to the context
+7. also give some additional information to make the conversation more interesting
+8. When explaining about experience, projects, and skills, please also explain the potential impact of the project or experience
+9. You can ask questions to the user to make the conversation more interactive
+10. You can also ask for more information about the user's query to make the conversation more engaging
+11. if you don't know the answer to the user's query, you can ask the user to provide more information about the query
+12. The first sentence should be a response that shows that the AI understands the user's query
 
 **Current Query**: "${message}"
 `;
@@ -134,7 +140,7 @@ export async function POST(request: Request) {
     const model = genAI.getGenerativeModel({
       model: 'gemini-pro',
       generationConfig: {
-        temperature: isFirstMessage ? 0.7 : 0.3,
+        temperature: isFirstMessage ? 0.7 : 0.55,
         topP: 0.85
       }
     });

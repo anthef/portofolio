@@ -1,8 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState, useRef, useEffect, useId } from 'react';
 import Markdown from '@uiw/react-markdown-preview';
 import { motion } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
 import { Send, Lightbulb } from 'lucide-react';
+import { Camera, ImagePlus, X } from 'lucide-react';
 
 interface Message {
   isBot: boolean;
@@ -10,6 +12,12 @@ interface Message {
   id: string;
   fullText?: string;
   showCopied?: boolean;
+  images?: string[];
+}
+
+interface ImagePreview {
+  id: string;
+  data: string;
 }
 
 export default function ChatBot() {
@@ -21,30 +29,31 @@ export default function ChatBot() {
   const processedMessages = useRef<Set<string>>(new Set());
   const prevMessagesLength = useRef(0);
   const id = useId();
+  const [imagePreviews, setImagePreviews] = useState<ImagePreview[]>([]);
 
   const tips = [
     { 
       text: {
-        en: "💡 Ask me about my work experience!",
-        id: "💡 Tanya tentang pengalaman kerja saya!"
+        en: "💡 Ask me about Anthony's work experience!",
+        id: "💡 Tanya tentang pengalaman kerja Anthony!"
       }
     },
     {
       text: {
-        en: "🌟 Want to know my educational background?",
-        id: "🌟 Mau tahu latar belakang pendidikan saya?"
+        en: "🌟 Want to know Anthony's educational background?",
+        id: "🌟 Mau tahu latar belakang pendidikan Anthony?"
       }
     },
     {
       text: {
-        en: "🚀 Ask about projects I've worked on!",
-        id: "🚀 Tanya tentang proyek yang pernah saya kerjakan!"
+        en: "🚀 Ask about projects Anthony has worked on!",
+        id: "🚀 Tanya tentang proyek yang pernah Anthony kerjakan!"
       }
     },
     {
       text: {
-        en: "📚 What technical skills do I have?",
-        id: "📚 Skill teknis apa saja yang saya kuasai?"
+        en: "📚 What technical skills do Anthony's have?",
+        id: "📚 Skill teknis apa saja yang Anthony kuasai?"
       }
     }
   ];
@@ -124,28 +133,69 @@ export default function ChatBot() {
     }, 100);
   };
 
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files) return;
+  
+    const newImages: ImagePreview[] = [];
+    
+    for (const file of Array.from(files)) {
+      if (file.size > 5 * 1024 * 1024) { // Batas 5MB
+        alert(input.toLowerCase().startsWith('id') 
+          ? "Ukuran gambar melebihi 5MB" 
+          : "Image size exceeds 5MB");
+        continue;
+      }
+  
+      const reader = new FileReader();
+      reader.onload = (loadEvent) => {
+        const result = loadEvent.target?.result;
+        if (result) {
+          newImages.push({
+            id: uuidv4(),
+            data: result.toString()
+          });
+          setImagePreviews(prev => [...prev, ...newImages]);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+  
+  // Fungsi untuk menghapus preview gambar
+  const removeImagePreview = (id: string) => {
+    setImagePreviews(prev => prev.filter(img => img.id !== id));
+  };
+
+  
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!input.trim()) return;
+    const hasContent = input.trim() || imagePreviews.length > 0;
+    if (!hasContent) return;
 
     const userMessage: Message = {
       isBot: false,
       text: input,
       id: `${id}-${uuidv4()}`,
-      showCopied: false
+      showCopied: false,
+      images: imagePreviews.map(img => img.data)
     };
 
     setMessages(prev => [...prev, userMessage]);
     setIsLoading(true);
     setInput('');
+    setImagePreviews([]);
 
     try {
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: input })
+        body: JSON.stringify({ 
+          message: input,
+          images: imagePreviews.map(img => img.data) 
+        })
       });
-
+      
       if (!response.ok) throw new Error('API response error');
       const data = await response.json();
 
@@ -237,7 +287,7 @@ export default function ChatBot() {
         )}
       </motion.div>
 
-      <div className="max-w-[1000px] mx-auto w-full rounded-lg overflow-hidden relative 
+      <div className="max-w-[700px] mx-auto w-full rounded-lg overflow-hidden relative 
         before:absolute before:inset-0 before:bg-gradient-to-r before:from-[#348B96] before:to-[#24475B] 
         before:rounded-lg before:-z-10 before:p-[2px] before:shadow-[0_0_30px_rgba(52,139,150,0.6)]">
         
@@ -265,7 +315,20 @@ export default function ChatBot() {
                       ? 'bg-white text-gray-800 rounded-tl-none shadow-md font-poppins' 
                       : 'bg-white text-gray-800 rounded-tr-none shadow-md font-poppins'
                   }`}>
-                    <Markdown source={msg.text} />
+                     {msg.images && msg.images.length > 0 && (
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        {msg.images.map((img, index) => (
+                          <img
+                            key={index}
+                            src={img}
+                            alt="Uploaded content"
+                            className="w-16 h-16 object-cover rounded-lg border border-gray-200"
+                          />
+                        ))}
+                      </div>
+                    )}
+                    
+                    {msg.text && <Markdown source={msg.text} />}
                     
                     <button
                       onClick={() => handleCopy(msg.id)}
@@ -328,24 +391,88 @@ export default function ChatBot() {
           <form 
             id="chat-form"
             onSubmit={handleSubmit}
-            className="flex p-4 bg-white/10 border-t border-[#348B96]/30"
+            className="flex flex-col p-4 bg-white/10 border-t border-[#348B96]/30"
           >
-            <input
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder={input.toLowerCase().startsWith('id') ? "Tanyakan apa saja..." : "Ask me anything..."}
-              className="flex-1 p-2 mr-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#123655] text-gray-800 bg-white/90"
-              aria-label="Chat input"
-            />
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="p-2 bg-[#123655] text-white rounded-full hover:bg-[#1a4a6e] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              aria-label="Send message"
-            >
-              <Send size={20} />
-            </button>
+            {imagePreviews.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-2">
+                {imagePreviews.map((img) => (
+                  <div key={img.id} className="relative group">
+                    <img 
+                      src={img.data} 
+                      alt="Preview" 
+                      className="w-16 h-16 object-cover rounded-lg border border-gray-200"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeImagePreview(img.id)}
+                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-0.5 
+                        opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="flex gap-2 flex-nowrap">
+                <label className="relative group p-1 md:p-2 rounded-full hover:bg-gray-400 transition-colors shrink-0 bg-gray-400 cursor-not-allowed">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    disabled 
+                    onChange={handleImageUpload}
+                    className="hidden"
+                    aria-label="Upload image"
+                  />
+                  <ImagePlus className="w-5 h-5 md:w-6 md:h-6 text-gray-600" />
+                </label>
+
+                <label className="p-1 md:p-2rounded-full hover:bg-gray-400 transition-colors shrink-0 md:hidden bg-gray-400 cursor-not-allowed">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    capture="environment"
+                    onChange={handleImageUpload}
+                    className="hidden"
+                    aria-label="Take photo"
+                    disabled={true}
+                  />
+                  <Camera className="w-5 h-5 md:w-6 md:h-6 text-gray-600" />
+                </label>
+
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  placeholder={input.toLowerCase().startsWith('id') ? "Tanyakan..." : "Ask me..."}
+                  className="flex-1 p-2 mr-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#123655] text-gray-800 bg-white/90 text-sm md:text-base min-w-0"
+                  aria-label="Chat input"
+                />
+
+                <button
+                  type="submit"
+                  disabled={isLoading || (!input.trim() && imagePreviews.length === 0)}
+                  className={`relative group p-2 md:p-3 text-white rounded-full transition-colors shrink-0 ${
+                    isLoading || (!input.trim() && imagePreviews.length === 0)
+                      ? 'bg-gray-400 cursor-not-allowed'
+                      : 'bg-[#123655] hover:bg-[#1a4a6e] cursor-pointer'
+                  }`}
+                  aria-label="Send message"
+                >
+                  <Send className="w-5 h-5 md:w-6 md:h-6" />
+                  
+                  {/* Tooltip untuk disabled state */}
+                  {(isLoading || (!input.trim() && imagePreviews.length === 0)) && (
+                    <div className="hidden group-hover:block absolute bottom-full right-0 mb-2 px-3 py-1 text-sm bg-gray-700 text-white rounded-lg shadow-lg">
+                      {input.toLowerCase().startsWith('id') 
+                        ? "Silakan masukkan pesan terlebih dahulu" 
+                        : "Please enter a message first"}
+                    </div>
+                  )}
+                </button>
+              </div>
           </form>
         </div>
       </div>

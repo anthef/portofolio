@@ -3,6 +3,22 @@ import { SingularExperienceType } from './interface'
 
 const OrgExperience: SingularExperienceType[] = [
   {
+    name: 'RISTEK UI 2024',
+    logo: 'ristek.png',
+    links: [{ name: 'Instagram', link: 'https://www.ristek.cs.ui.ac.id/' }],
+    date: 'Maret 2025 - Maret 2026',
+    location: 'Jakarta, Indonesia',
+    roles: [
+      {
+        name: 'Member of Data Science & Artificial Intelligence SIG',
+        date: 'Maret 2025 - Maret 2026',
+        description: [
+        ],
+      },
+    ],
+    skills: [Ahli.Python],
+  },
+  {
     name: 'COMPFEST 16',
     logo: 'compfest.jpeg',
     links: [{ name: 'Instagram', link: 'https://www.instagram.com/compfest/' }],

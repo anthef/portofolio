@@ -101,7 +101,6 @@ const ProjectCard = ({
         )}
         {collaborators && (
           <div className="flex flex-wrap gap-2 font-normal text-sm md:text-md">
-            Collabs:{' '}
             {collaborators.map((person, idx) => (
               <span className="text-secondary underline" key={idx}>
                 <a

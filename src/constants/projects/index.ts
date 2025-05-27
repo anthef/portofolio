@@ -49,22 +49,22 @@ export const PROJECTS = [
     type: 'SE',
     skills: [Ahli.Python, Ahli.Django, Ahli.Flutter, Ahli.Dart],
     collaborators: [
-      {
-        name : 'Kanda',
-        link : 'https://www.linkedin.com/in/kandamahendracs/'
-      },
-      {
-        name : 'Bertrand',
-        link : 'https://www.linkedin.com/in/bertrandgwynfory/'
-      },
-      {
-        name : 'Bram',
-        link : 'https://www.linkedin.com/in/abrahamjordy/'
-      },
-      {
-        name : 'Eva',
-        link : 'https://www.linkedin.com/in/eva-yunia-aliyanshah-012b1b288/'
-      },
+      // {
+      //   name : 'Kanda',
+      //   link : 'https://www.linkedin.com/in/kandamahendracs/'
+      // },
+      // {
+      //   name : 'Bertrand',
+      //   link : 'https://www.linkedin.com/in/bertrandgwynfory/'
+      // },
+      // {
+      //   name : 'Bram',
+      //   link : 'https://www.linkedin.com/in/abrahamjordy/'
+      // },
+      // {
+      //   name : 'Eva',
+      //   link : 'https://www.linkedin.com/in/eva-yunia-aliyanshah-012b1b288/'
+      // },
     ]
   },
   {
@@ -82,14 +82,14 @@ export const PROJECTS = [
     ],
     skills: [Ahli.Python], 
     collaborators: [
-      {
-        name : 'Arvin',
-        link : 'https://www.linkedin.com/in/arvinwijayanto/'
-      },
-      {
-        name : 'Maul',
-        link : 'https://www.linkedin.com/in/muhammad-raihan-maulana-a05a2823a/'
-      }
+      // {
+      //   name : 'Arvin',
+      //   link : 'https://www.linkedin.com/in/arvinwijayanto/'
+      // },
+      // {
+      //   name : 'Maul',
+      //   link : 'https://www.linkedin.com/in/muhammad-raihan-maulana-a05a2823a/'
+      // }
     ]
   },
   {
@@ -111,22 +111,22 @@ export const PROJECTS = [
     type: 'SE',
     skills: [Ahli.Python, Ahli.Django], 
     collaborators: [
-      {
-        name : 'Kanda',
-        link : 'https://www.linkedin.com/in/kandamahendracs/'
-      },
-      {
-        name : 'Bertrand',
-        link : 'https://www.linkedin.com/in/bertrandgwynfory/'
-      },
-      {
-        name : 'Bram',
-        link : 'https://www.linkedin.com/in/abrahamjordy/'
-      },
-      {
-        name : 'Eva',
-        link : 'https://www.linkedin.com/in/eva-yunia-aliyanshah-012b1b288/'
-      },
+      // {
+      //   name : 'Kanda',
+      //   link : 'https://www.linkedin.com/in/kandamahendracs/'
+      // },
+      // {
+      //   name : 'Bertrand',
+      //   link : 'https://www.linkedin.com/in/bertrandgwynfory/'
+      // },
+      // {
+      //   name : 'Bram',
+      //   link : 'https://www.linkedin.com/in/abrahamjordy/'
+      // },
+      // {
+      //   name : 'Eva',
+      //   link : 'https://www.linkedin.com/in/eva-yunia-aliyanshah-012b1b288/'
+      // },
     ]
   },
   {
@@ -144,10 +144,10 @@ export const PROJECTS = [
     ],
     skills: [Ahli.Flutter, Ahli.Dart, Ahli.Firebase], 
     collaborators: [
-      {
-        name : 'INA Satu Tujuh MobDev Team',
-        link : 'https://www.ina17.com/'
-      }
+      // {
+      //   name : 'INA Satu Tujuh MobDev Team',
+      //   link : 'https://www.ina17.com/'
+      // }
     ]
   },
   {
@@ -207,14 +207,14 @@ export const PROJECTS = [
     ],
     skills: [Ahli.Python], 
     collaborators: [
-      {
-        name : 'Arvin',
-        link : 'https://www.linkedin.com/in/arvinwijayanto/'
-      },
-      {
-        name : 'Filbert',
-        link : 'https://www.linkedin.com/in/filbert-aurelian-tjiaranata-79336225a/'
-      }
+      // {
+      //   name : 'Arvin',
+      //   link : 'https://www.linkedin.com/in/arvinwijayanto/'
+      // },
+      // {
+      //   name : 'Filbert',
+      //   link : 'https://www.linkedin.com/in/filbert-aurelian-tjiaranata-79336225a/'
+      // }
     ]
   },
   {
@@ -232,14 +232,14 @@ export const PROJECTS = [
     ],
     skills: [Ahli.Python], 
     collaborators: [
-      {
-        name : 'Guntara',
-        link : 'https://www.linkedin.com/in/guntara-hambali-380211283/'
-      },
-      {
-        name : 'Rafka',
-        link : 'https://linkedin.com/in/rafka-athallah-putra-hasyim-4bb9ab19b/'
-      }
+      // {
+      //   name : 'Guntara',
+      //   link : 'https://www.linkedin.com/in/guntara-hambali-380211283/'
+      // },
+      // {
+      //   name : 'Rafka',
+      //   link : 'https://linkedin.com/in/rafka-athallah-putra-hasyim-4bb9ab19b/'
+      // }
     ]
   },
   {
@@ -265,14 +265,14 @@ export const PROJECTS = [
     ],
     skills: [Ahli.Python], 
     collaborators: [
-      {
-        name : 'Guntara',
-        link : 'https://www.linkedin.com/in/guntara-hambali-380211283/'
-      },
-      {
-        name : 'Rafka',
-        link : 'https://linkedin.com/in/rafka-athallah-putra-hasyim-4bb9ab19b/'
-      }
+      // {
+      //   name : 'Guntara',
+      //   link : 'https://www.linkedin.com/in/guntara-hambali-380211283/'
+      // },
+      // {
+      //   name : 'Rafka',
+      //   link : 'https://linkedin.com/in/rafka-athallah-putra-hasyim-4bb9ab19b/'
+      // }
     ]
   },
 ]

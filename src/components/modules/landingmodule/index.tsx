@@ -12,12 +12,12 @@ export const LandingModule: React.FC = () => {
   return (
     <>
       <div>
-        <About />
-        <ChatBot/>
-        <Education />
+        <About />        
         <Achievement/>
         <Experiences />
         <Projects />
+        <Education />
+        <ChatBot/>
       </div>
     </>
   )

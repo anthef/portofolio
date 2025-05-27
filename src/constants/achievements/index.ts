@@ -111,7 +111,7 @@ export const ACHIEVEMENTS: AchievementType[] = [
     issuer:
       'Telkom Institute of Technology Purwokerto',
     image: 'dataslayer_2.png',
-    date: 'Jan 2024',
+    date: 'Jan 2025',
     medal: '4th',
     description:
       'Overcame 220+ teams by developing a human fall detection system utilizing an ensemble approach combining LightGBM and ResNet. This method effectively identified and analyzed fall events with high accuracy, showcasing the power of integrating machine learning and deep learning techniques.',

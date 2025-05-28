@@ -138,7 +138,7 @@ export async function POST(request: Request) {
     const prompt = createPrompt(message, userLanguage, isFirstMessage);
 
     const model = genAI.getGenerativeModel({
-      model: 'gemini-1.5-pro',
+      model: 'gemini-2.0-flash',
       generationConfig: {
         temperature: 1,
         topP: 0.95,

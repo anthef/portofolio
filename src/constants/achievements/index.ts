@@ -35,7 +35,7 @@ export const ACHIEVEMENTS: AchievementType[] = [
         link: 'https://www.instagram.com/bssparking/p/DK86Ms-zXg9/?img_index=3',
       },
     ],
-    skills : [Ahli.Python, Ahli.NextJS, Ahli.NoseJS],
+    skills : [Ahli.Python, Ahli.NextJS, Ahli.NodeJS],
     jenjang : 'university'
   },
   {

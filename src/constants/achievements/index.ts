@@ -3,6 +3,60 @@ import { Ahli } from '../Skills'
 
 export const ACHIEVEMENTS: AchievementType[] = [
   {
+    name: '1st Winner of Internation Data Science FIT Competition',
+    issuer:
+      'FIT Competition, Universitas Kristen Satya Wacana',
+    image: 'fit_compe.jpg',
+    date: 'Aug 2025',
+    medal: 'gold',
+    description:
+      'Developed a weather image segmentation system using U-Net combined with traditional post-processing techniques. Implemented a CNN-based classification model enhanced with knowledge distillation for improved efficiency and accuracy.',
+    links: [
+      {
+        name: 'Certificate',
+        link: 'https://drive.google.com/file/d/1bdwcbxpQBn2cG31iMpt3Le0q6ZGQxOa9/view?usp=sharing',
+      },
+    ],
+    skills : [Ahli.Python],
+    jenjang : 'university'
+  },
+  {
+    name: '2nd Winner of Internation Data Science FIT Competition',
+    issuer:
+      'FIT Competition, Universitas Kristen Satya Wacana',
+    image: 'bss.png',
+    date: 'July 2025',
+    medal: 'silver',
+    description:
+      '•	I developed a parking monitoring dashboard system integrated with a custom gate device powered by Raspberry Pi. The system uses a YOLO-based model for real-time license plate detection to automate vehicle entry and exit.',
+    links: [
+      {
+        name: 'Announcement',
+        link: 'https://www.instagram.com/bssparking/p/DK86Ms-zXg9/?img_index=3',
+      },
+    ],
+    skills : [Ahli.Python, Ahli.NextJS, Ahli.NoseJS],
+    jenjang : 'university'
+  },
+  {
+    name: 'Top 10 Team of Data Science Academy COMPFEST 15',
+    issuer:
+      'BSS Parking',
+    image: 'dsa_comp.jpg',
+    date: 'Aug 2023',
+    medal: 'top-10',
+    description:
+      'Chosen as one of the top 10 teams out of 250+ participants by conducting research on the effectiveness of flood management across two different periods.',
+    links: [
+      {
+        name: 'Certificate',
+        link: 'https://drive.google.com/file/d/1bdwcbxpQBn2cG31iMpt3Le0q6ZGQxOa9/view?usp=sharing',
+      },
+    ],
+    skills : [Ahli.Python],
+    jenjang : 'university'
+  },
+  {
     name: 'Finalis KIHAJAR STEM Jenjang SMA, Pusat Data dan Teknologi Informasi Kementrian Pendidikan dan Kebudayaan',
     issuer:
       'Pusat Data dan Teknologi Informasi Kementrian Pendidikan dan Kebudayaan',

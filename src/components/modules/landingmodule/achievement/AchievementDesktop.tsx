@@ -4,7 +4,6 @@ import { useWindowSize } from '@hooks'
 import { ACHIEVEMENTS } from '@constants'
 import { motion } from 'framer-motion'
 
-// Define the custom sorting order for medals
 const medalRankOrder: Record<string, number> = {
   gold: 1,
   silver: 2,
@@ -18,11 +17,10 @@ const medalRankOrder: Record<string, number> = {
 const AchievementDesktop = () => {
   const [selectedTag, setSelectedTag] = useState<number>(0)
   const [filteredAchievement, setFilteredProjects] = useState(ACHIEVEMENTS)
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc') // Ascending or Descending
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc')
   const { width } = useWindowSize()
 
   useEffect(() => {
-    // Filter achievements based on selected tag (jenjang)
     let filtered = ACHIEVEMENTS
     if (selectedTag === 1) {
       filtered = ACHIEVEMENTS.filter(

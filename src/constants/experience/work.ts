@@ -3,6 +3,21 @@ import { SingularExperienceType } from './interface'
 
 const WorkExperience: SingularExperienceType[] = [
   {
+    name: 'PT Fungsitama Cipta Teknologi',
+    logo: 'pt_fungsitama_cipta_teknologi_logo.jpeg',
+    links: [{ name: 'Website', link: 'https://fungsitama.com/' }], 
+    roles: [
+      {
+      name : 'FullStack Developer',
+      date : 'May 2025 - Present',
+      description: [
+        'To accelerate the development process and maintain a clean, scalable architecture, we use a fullstack boilerplate that integrates Next.js (for the frontend and server-side rendering) with Node.js (as the backend API layer). This boilerplate provides a solid foundation for building modular ERP (Enterprise Resource Planning) systems',
+      ],
+    },
+    ],
+    skills : [Ahli.Python]
+  },
+  {
     name: 'Universitas Indonesia Fakultas Ilmu Komputer',
     logo: 'fasilkom.png',
     links: [{ name: 'Website', link: 'https://cs.ui.ac.id/' }], 

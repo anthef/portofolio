@@ -51,7 +51,7 @@ export const Footer: React.FC = () => {
             ))}
           </div>
           <a
-            href="/documents/cv.pdf"
+            href="/documents/CV - Anthony Edbert Feriyanto.pdf"
             download="Anthony_Edbert_Feriyanto_CV.pdf"
             className="flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 bg-secondary text-white rounded-lg font-bold shadow-lg hover:bg-secondary-dark transition-all transform hover:scale-105 active:scale-95 border border-white text-sm md:text-base"
           >

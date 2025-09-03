@@ -1,14 +1,12 @@
-/* Experiences.module.css */
-
 .extendedLine {
-    width: 112px; /* Equivalent to w-28 */
+    width: 112px; 
   }
   
   .shiftRight {
-    padding-right: 7rem; /* Equivalent to pr-28 */
+    padding-right: 7rem;
   }
   
   .shiftLeft {
-    padding-left: 7rem; /* Equivalent to pl-28 */
+    padding-left: 7rem; 
   }
   

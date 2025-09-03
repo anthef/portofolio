@@ -162,7 +162,6 @@ export default function ChatBot() {
     }
   };
   
-  // Fungsi untuk menghapus preview gambar
   const removeImagePreview = (id: string) => {
     setImagePreviews(prev => prev.filter(img => img.id !== id));
   };

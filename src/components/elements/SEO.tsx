@@ -20,7 +20,6 @@ const SEO: React.FC<SEOProps> = ({
 }) => {
   return (
     <Head>
-      {/* Basic Meta Tags */}
       <title>{title}</title>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
@@ -30,7 +29,6 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="language" content="English" />
       <meta name="theme-color" content="#000F2B" />
       
-      {/* Open Graph / Facebook */}
       <meta property="og:type" content={type} />
       <meta property="og:url" content={url} />
       <meta property="og:title" content={title} />
@@ -39,31 +37,25 @@ const SEO: React.FC<SEOProps> = ({
       <meta property="og:site_name" content="Anthony's Portfolio" />
       <meta property="og:locale" content="en_US" />
       
-      {/* Twitter */}
       <meta property="twitter:card" content="summary_large_image" />
       <meta property="twitter:url" content={url} />
       <meta property="twitter:title" content={title} />
       <meta property="twitter:description" content={description} />
       <meta property="twitter:image" content={image} />
       <meta name="twitter:creator" content="@anthony_feriyanto" />
-      
-      {/* Additional Meta Tags */}
+
       <meta name="format-detection" content="telephone=no" />
       <meta name="msapplication-TileColor" content="#000F2B" />
       <meta name="msapplication-config" content="/browserconfig.xml" />
       
-      {/* Canonical URL */}
       <link rel="canonical" href={url} />
       
-      {/* Favicon */}
       <link rel="icon" href="/profile/icon.png" />
       <link rel="apple-touch-icon" href="/profile/icon.png" />
-      
-      {/* Preconnect for Performance */}
+
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       
-      {/* JSON-LD Structured Data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

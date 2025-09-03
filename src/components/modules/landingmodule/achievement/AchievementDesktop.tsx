@@ -40,18 +40,15 @@ const AchievementDesktop = () => {
       )
     }
 
-    // Sort filtered achievements based on medal rank and order (asc or desc)
     filtered.sort((a, b) => {
       const rankA = medalRankOrder[a.medal] ?? 7
       const rankB = medalRankOrder[b.medal] ?? 7
       return sortOrder === 'asc' ? rankA - rankB : rankB - rankA
     })
 
-    // Set filtered and sorted achievements
     setFilteredProjects(filtered)
   }, [selectedTag, sortOrder])
 
-  // Determine the projects to display based on selected tag
   const displayedProjects =
     selectedTag === 0 ? filteredAchievement : filteredAchievement.slice(0, 20)
   const gridColumns =
@@ -80,7 +77,6 @@ const AchievementDesktop = () => {
         </h1>
       </motion.div>
 
-      {/* Filter Chips and Sort Button in the Same Row */}
       <div className="flex flex-wrap gap-2 z-10 py-2 justify-center items-center">
         <div className="flex gap-2">
           <Chips

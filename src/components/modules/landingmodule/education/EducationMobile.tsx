@@ -1,4 +1,3 @@
-// Import necessary modules and styles
 import 'swiper/css';
 import 'swiper/css/navigation';
 import React, { useState, useEffect } from 'react';

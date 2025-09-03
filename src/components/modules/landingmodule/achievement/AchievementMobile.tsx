@@ -17,11 +17,10 @@ const medalRankOrder: Record<string, number> = {
 const AchievementMobile = () => {
   const [selectedTag, setSelectedTag] = useState<number>(0)
   const [filteredAchievement, setFilteredProjects] = useState(ACHIEVEMENTS)
-  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc') // Ascending or Descending
+  const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc') 
   const { width } = useWindowSize()
 
   useEffect(() => {
-    // Filter achievements based on selected tag (jenjang)
     let filtered = ACHIEVEMENTS
     if (selectedTag === 1) {
       filtered = ACHIEVEMENTS.filter(
@@ -41,18 +40,16 @@ const AchievementMobile = () => {
       )
     }
 
-    // Sort filtered achievements based on medal rank and order (asc or desc)
+
     filtered.sort((a, b) => {
       const rankA = medalRankOrder[a.medal] ?? 7
       const rankB = medalRankOrder[b.medal] ?? 7
       return sortOrder === 'asc' ? rankA - rankB : rankB - rankA
     })
 
-    // Set filtered and sorted achievements
     setFilteredProjects(filtered)
   }, [selectedTag, sortOrder])
 
-  // Determine the projects to display based on selected tag
   const displayedProjects =
     selectedTag === 0 ? filteredAchievement : filteredAchievement.slice(0, 20)
   const gridColumns =
@@ -80,10 +77,7 @@ const AchievementMobile = () => {
           Achievements
         </h1>
       </motion.div>
-
-      {/* Filter Chips and Sort Button in the Same Row */}
       <div className="flex flex-col md:flex-row gap-2 z-10 py-2 justify-center items-center">
-        {/* Chips */}
         <div className="flex flex-wrap gap-2 justify-center md:flex-row">
           <Chips
             enabled={selectedTag === 0}

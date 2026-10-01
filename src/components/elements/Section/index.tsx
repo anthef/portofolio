@@ -1,11 +1,11 @@
 import React from 'react'
 import { Code } from '../Code'
 
-// Square node drawn where a section rule meets the ruler rails.
-export const RailNode: React.FC<{ className?: string }> = ({ className = '' }) => (
+// Dashed notebook margin running down the page, between the prompt gutter and the content.
+export const MarginLine: React.FC = () => (
   <span
     aria-hidden
-    className={`pointer-events-none absolute hidden h-[7px] w-[7px] border border-line-strong bg-bg md:block ${className}`}
+    className="pointer-events-none absolute inset-y-0 left-[152px] hidden border-l border-dashed border-line-strong lg:block"
   />
 )
 
@@ -14,35 +14,28 @@ interface SectionProps {
   className?: string
   innerClassName?: string
   children: React.ReactNode
-  // Content rendered full-bleed behind the frame.
+  // Content rendered full-bleed behind the column (colour fields, etc.).
   backdrop?: React.ReactNode
-  rule?: boolean
 }
 
 export const Section: React.FC<SectionProps> = ({
   id,
   className = '',
-  innerClassName = 'frame-pad py-20 md:py-28',
+  innerClassName = 'py-16 md:py-24',
   children,
   backdrop,
-  rule = true,
 }) => (
-  <section id={id} className={`relative scroll-mt-16 ${className}`}>
+  <section id={id} className={`relative scroll-mt-20 ${className}`}>
     {backdrop}
-    <div className={`frame ${rule ? 'border-t border-line' : ''}`}>
-      {rule && (
-        <>
-          <RailNode className="-left-[4px] -top-[4px]" />
-          <RailNode className="-right-[4px] -top-[4px]" />
-        </>
-      )}
-      <div className={`relative ${innerClassName}`}>{children}</div>
+    <div className="frame frame-pad">
+      <MarginLine />
+      <div className={`nb-body relative ${innerClassName}`}>{children}</div>
     </div>
   </section>
 )
 
 interface SectionHeaderProps {
-  // Notebook execution count shown as `In [n]:`.
+  // Notebook execution count shown as `In [n]:` in the gutter.
   cell: number
   // One-line snippet that "produces" the section.
   code: string
@@ -64,38 +57,29 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
 }) => {
   const centered = align === 'center'
   return (
-    <div className={`flex flex-col gap-5 ${centered ? 'items-center text-center' : 'items-start'} ${className}`}>
-      <p className="max-w-full overflow-x-auto whitespace-nowrap text-[12.5px] scrollbar-none">
-        <span className="mr-2 font-mono text-faint">In [{cell}]:</span>
-        <Code>{code}</Code>
-      </p>
-      <h2 className="text-balance font-display text-[32px] font-medium leading-[1.04] text-ink md:text-[46px]">
-        {title}
-      </h2>
-      {description && (
-        <p className={`max-w-[540px] text-[16px] leading-relaxed text-muted md:text-[17px] ${centered ? 'mx-auto' : ''}`}>
-          {description}
+    <div className={`nb-gutter ${className}`}>
+      <span className="mb-2 block font-mono text-[12px] text-accent lg:mb-0 lg:pt-[2px] lg:text-right">
+        In [{cell}]:
+      </span>
+      <div className={`flex min-w-0 flex-col gap-5 ${centered ? 'items-center text-center' : 'items-start'}`}>
+        <p className="max-w-full overflow-x-auto whitespace-nowrap text-[12.5px] scrollbar-none">
+          <Code>{code}</Code>
         </p>
-      )}
-      {children}
+        <h2 className="text-balance font-display text-[34px] font-medium leading-[1.04] text-ink md:text-[48px]">
+          {title}
+        </h2>
+        {description && (
+          <p className={`max-w-[540px] text-[16px] leading-relaxed text-muted md:text-[17px] ${centered ? 'mx-auto' : ''}`}>
+            {description}
+          </p>
+        )}
+        {children}
+      </div>
     </div>
   )
 }
 
-// Graph-paper placeholders that complete the last row of a `.cell-grid`
-// so the hairline background never shows through as a solid block.
-export const GridFill: React.FC<{ count: number; md?: number; lg?: number }> = ({ count, md = 2, lg = 3 }) => {
-  const fillMd = (md - (count % md)) % md
-  const fillLg = (lg - (count % lg)) % lg
-  return (
-    <>
-      {Array.from({ length: Math.max(fillMd, fillLg) }, (_, i) => (
-        <div
-          key={i}
-          aria-hidden
-          className={`graph-paper hidden ${i < fillMd ? 'md:block' : 'md:hidden'} ${i < fillLg ? 'lg:block' : 'lg:hidden'}`}
-        />
-      ))}
-    </>
-  )
-}
+// Soft blurred colour field used as a section backdrop.
+export const Blob: React.FC<{ className?: string; color?: string }> = ({ className = '', color = 'var(--accent)' }) => (
+  <span aria-hidden className={`blob ${className}`} style={{ background: color }} />
+)

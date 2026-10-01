@@ -13,7 +13,7 @@ export const ThemeToggle: React.FC<{ className?: string }> = ({ className = '' }
       onClick={toggleTheme}
       aria-label={`Switch to ${next} theme`}
       title={`Switch to ${next} theme`}
-      className={`flex h-9 w-9 items-center justify-center rounded-[8px] border border-line-strong bg-surface text-muted transition-colors hover:border-ink hover:text-ink ${className}`}
+      className={`flex h-10 w-10 items-center justify-center rounded-full bg-well text-muted transition-colors hover:bg-raised hover:text-ink ${className}`}
     >
       {/* Icons swap via CSS so the first paint already matches the theme. */}
       <FiSun size={15} className="hidden dark:block" />

@@ -21,13 +21,13 @@ export type ButtonProps = AnchorProps | NativeButtonProps
 
 const VARIANTS: Record<Variant, string> = {
   primary: 'bg-inverse text-on-inverse hover:bg-accent hover:text-on-inverse',
-  secondary: 'border border-line-strong bg-surface text-ink hover:border-ink',
+  secondary: 'card-shadow bg-surface text-ink hover:text-accent',
   ghost: 'text-ink underline-offset-[5px] hover:underline decoration-line-strong',
 }
 
 const SIZES: Record<Size, string> = {
-  sm: 'h-9 rounded-[8px] px-3.5 text-[14px]',
-  md: 'h-11 rounded-[10px] px-5 text-[15px]',
+  sm: 'h-9 rounded-full px-4 text-[14px]',
+  md: 'h-12 rounded-full px-6 text-[15px]',
 }
 
 export const buttonClassName = (variant: Variant = 'primary', size: Size = 'md', className = '') =>
@@ -35,7 +35,7 @@ export const buttonClassName = (variant: Variant = 'primary', size: Size = 'md',
 
 const Kbd: React.FC<{ children: string; inverse: boolean }> = ({ children, inverse }) => (
   <kbd
-    className={`ml-1 inline-flex h-5 min-w-5 items-center justify-center rounded-[4px] border px-1 font-mono text-[11px] leading-none ${
+    className={`ml-1 inline-flex h-5 min-w-5 items-center justify-center rounded-full border px-1.5 font-mono text-[11px] leading-none ${
       inverse ? 'opacity-70' : 'border-line-strong text-faint'
     }`}
     style={inverse ? { borderColor: 'color-mix(in srgb, currentColor 35%, transparent)' } : undefined}

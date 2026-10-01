@@ -8,10 +8,10 @@ interface TagProps {
 
 // Lowercase mono tag for skills and types.
 export const Tag: React.FC<TagProps> = ({ children, href, className = '' }) => {
-  const classes = `inline-flex h-6 items-center gap-1.5 whitespace-nowrap rounded-[5px] border border-line bg-surface px-2 font-mono text-[11.5px] lowercase text-muted ${className}`
+  const classes = `inline-flex h-6 items-center gap-1.5 whitespace-nowrap rounded-full bg-raised px-2.5 font-mono text-[11.5px] lowercase text-muted ${className}`
   if (href) {
     return (
-      <a href={href} target="_blank" rel="noreferrer" className={`${classes} transition-colors hover:border-accent hover:text-accent`}>
+      <a href={href} target="_blank" rel="noreferrer" className={`${classes} transition-colors hover:bg-accent-soft hover:text-accent`}>
         {children}
       </a>
     )
@@ -27,12 +27,12 @@ interface TabsProps<T extends string | number> {
   ariaLabel: string
 }
 
-// Underlined tab row with superscript counts.
+// Soft pill tabs with superscript counts.
 export const Tabs = <T extends string | number>({ value, onChange, options, className = '', ariaLabel }: TabsProps<T>) => (
   <div
     role="tablist"
     aria-label={ariaLabel}
-    className={`scrollbar-none flex max-w-full gap-5 overflow-x-auto border-b border-line ${className}`}
+    className={`scrollbar-none inline-flex max-w-full gap-1 overflow-x-auto rounded-full bg-well p-1 ${className}`}
   >
     {options.map((option) => {
       const active = option.value === value
@@ -43,13 +43,13 @@ export const Tabs = <T extends string | number>({ value, onChange, options, clas
           role="tab"
           aria-selected={active}
           onClick={() => onChange(option.value)}
-          className={`relative -mb-px flex h-10 shrink-0 items-start gap-1 border-b-2 pt-2.5 text-[14.5px] transition-colors duration-200 ${
-            active ? 'border-accent text-ink' : 'border-transparent text-muted hover:text-ink'
+          className={`flex h-9 shrink-0 items-center gap-1.5 rounded-full px-4 text-[14px] transition-all duration-300 ease-out ${
+            active ? 'card-shadow bg-surface text-ink' : 'text-muted hover:text-ink'
           }`}
         >
           {option.label}
           {option.count !== undefined && (
-            <sup className={`top-0 font-mono text-[10.5px] ${active ? 'text-accent' : 'text-faint'}`}>{option.count}</sup>
+            <span className={`font-mono text-[11px] ${active ? 'text-accent' : 'text-faint'}`}>{option.count}</span>
           )}
         </button>
       )

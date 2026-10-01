@@ -2,15 +2,31 @@ import { Ahli } from '../Skills'
 
 export const PROJECTS = [
   {
+    name: 'BaKu Website',
+    date: '2025',
+    description:
+      'Developed a secure web platform for centralized library book borrowing and online reading, eliminating the need for physical visits.',
+    type: 'SE',
+    skills: [],
+  },
+  {
+    name: 'SIZOPI Website',
+    date: '2025',
+    description:
+      'Designed and developed a centralized zoo management system in PostgreSQL, leveraging triggers, stored procedures, and advanced queries, to ensure efficient data handling and operational support.',
+    type: 'SE',
+    skills: [Ahli.PostgreSQL, Ahli.SQL],
+  },
+  {
     name: "Anthony's Portfolio Website",
     image: 'tba.png',
-    date: 'Jan 2025 - Present',
+    date: '2025 - Present',
     description:
-      "This website is a dynamic showcase of my latest experiences, projects, achievements, and educational journey. It's a platform where I share my professional growth, creative work, and personal milestones. Currently, the design is optimized for desktop users, but I am actively working on making it fully responsive to ensure a seamless and visually appealing experience across all devices. Stay tuned for updates, and thank you for visiting!",
+      'Built a dynamic website showcasing my experiences and projects, and updated its desktop-optimized design to be fully responsive across devices — now redesigned as an interactive data-science notebook.',
     links: [
       {
         name: 'Website',
-        link: 'https://install.appcenter.ms/users/anthonyef09/apps/jaket/distribution_groups/public/releases/7',
+        link: 'https://anthony-portofolio.vercel.app',
       },
       {
         name: 'GitHub',
@@ -18,7 +34,7 @@ export const PROJECTS = [
       },
     ],
     type: 'SE',
-    skills: [Ahli.Python, Ahli.Django, Ahli.Flutter, Ahli.Dart],
+    skills: [Ahli.NextJS, Ahli.React, Ahli.TypeScript, Ahli.TailwindCSS],
     collaborators: [
       {
         name : 'Arisha Shaista Aurelya',

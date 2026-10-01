@@ -151,4 +151,64 @@ export const Ahli: SkillType = {
     link: 'https://code.visualstudio.com/',
     color: '#007ACC',
   },
+  PyTorch: {
+    name: 'PyTorch',
+    link: 'https://pytorch.org/',
+    color: '#EE4C2C',
+  },
+  PostgreSQL: {
+    name: 'PostgreSQL',
+    link: 'https://www.postgresql.org/',
+    color: '#4169E1',
+  },
+  ClickHouse: {
+    name: 'ClickHouse',
+    link: 'https://clickhouse.com/',
+    color: '#C99A00',
+  },
+  GCP: {
+    name: 'Google Cloud',
+    link: 'https://cloud.google.com/',
+    color: '#4285F4',
+  },
+  Terraform: {
+    name: 'Terraform',
+    link: 'https://www.terraform.io/',
+    color: '#844FBA',
+  },
+  Golang: {
+    name: 'Go',
+    link: 'https://go.dev/',
+    color: '#00ADD8',
+  },
+  NestJS: {
+    name: 'NestJS',
+    link: 'https://nestjs.com/',
+    color: '#E0234E',
+  },
+  SpringBoot: {
+    name: 'Spring Boot',
+    link: 'https://spring.io/projects/spring-boot',
+    color: '#6DB33F',
+  },
+  Streamlit: {
+    name: 'Streamlit',
+    link: 'https://streamlit.io/',
+    color: '#FF4B4B',
+  },
+  Langfuse: {
+    name: 'Langfuse',
+    link: 'https://langfuse.com/',
+    color: '#0A60FF',
+  },
+  SQL: {
+    name: 'SQL',
+    link: 'https://en.wikipedia.org/wiki/SQL',
+    color: '#336791',
+  },
+  MCP: {
+    name: 'MCP',
+    link: 'https://modelcontextprotocol.io/',
+    color: '#D97757',
+  },
 };

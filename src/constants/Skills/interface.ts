@@ -2,7 +2,7 @@ export interface SkillSet {
     name : string
     color : string
     link : string
-    logo : string
+    logo? : string
 }
 
 

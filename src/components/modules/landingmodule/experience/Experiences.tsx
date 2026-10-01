@@ -3,82 +3,204 @@ import React, { useState } from 'react'
 import Image from 'next/image'
 import { EXPERIENCES } from '@constants'
 import { ExperienceType, SingularExperienceType } from 'src/constants/experience/interface'
-import { Reveal, Section, SectionHeader, StatusDot, Tabs, Tag } from '@elements'
+import { Blob, Button, Reveal, Section, SectionHeader, Tabs, Tag } from '@elements'
 
 type Kind = keyof ExperienceType
+type Filter = 'all' | Kind
 
-const KINDS: Record<Kind, { label: string; query: string }> = {
-  Work: { label: 'Work', query: 'work' },
-  Org: { label: 'Organization', query: 'organization' },
+const BRANCHES: Record<Kind, { ref: string; color: string }> = {
+  Work: { ref: 'main', color: 'var(--accent)' },
+  Org: { ref: 'org', color: 'var(--series-2)' },
 }
 
-const COLUMNS = 'md:grid-cols-[44px_minmax(0,1.25fr)_minmax(0,1fr)_190px_28px]'
+const FILTERS: { value: Filter; label: string; command: string }[] = [
+  { value: 'all', label: 'All', command: 'git log --graph --all' },
+  { value: 'Work', label: 'Work', command: 'git log --graph main' },
+  { value: 'Org', label: 'Organization', command: 'git log --graph org' },
+]
 
-const isCurrent = (experience: SingularExperienceType) =>
-  experience.roles.some((role) => role.date.includes('Present'))
+const INITIAL_VISIBLE = 7
+const LANE_GAP = 22
+const DOT_Y = 21
 
-const ExperienceRow: React.FC<{
+const MONTHS = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec']
+
+interface Commit {
+  kind: Kind
   experience: SingularExperienceType
-  index: number
+  date: string
+  start: number
+  current: boolean
+  hash: string
+}
+
+// "Apr 2026 - Present" -> 2026 * 12 + 3, used to interleave both branches by start date.
+const startOf = (date: string) => {
+  const match = date.match(/([A-Za-z]{3})[a-z]*\s+(\d{4})/)
+  if (!match) return 0
+  return Number(match[2]) * 12 + Math.max(0, MONTHS.indexOf(match[1].toLowerCase()))
+}
+
+// Stable pseudo commit hash so every entry keeps the same id between renders.
+const shortHash = (seed: string) => {
+  let h = 0x811c9dc5
+  for (let i = 0; i < seed.length; i++) h = Math.imul(h ^ seed.charCodeAt(i), 0x01000193)
+  return (h >>> 0).toString(16).padStart(8, '0').slice(0, 7)
+}
+
+const monogram = (name: string) =>
+  name
+    .replace(/^PT\.?\s+/i, '')
+    .split(/\s+/)
+    .filter((word) => /^[A-Za-z]/.test(word))
+    .slice(0, 2)
+    .map((word) => word[0].toUpperCase())
+    .join('')
+
+const COMMITS: Commit[] = (Object.keys(BRANCHES) as Kind[])
+  .flatMap((kind) =>
+    EXPERIENCES[kind].map((experience) => {
+      const date = (experience.date ?? experience.roles[0].date).trim()
+      return {
+        kind,
+        experience,
+        date,
+        start: startOf(date),
+        current: experience.roles.some((role) => role.date.includes('Present')),
+        hash: shortHash(`${kind}:${experience.name}:${experience.roles[0].name}`),
+      }
+    })
+  )
+  .sort((a, b) => b.start - a.start)
+
+const Logo: React.FC<{ experience: SingularExperienceType; color: string }> = ({ experience, color }) =>
+  experience.logo ? (
+    <span className="card-shadow relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-white">
+      <Image src={`/experiences/${experience.logo}`} alt="" fill sizes="44px" className="object-contain p-1" />
+    </span>
+  ) : (
+    <span
+      aria-hidden
+      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-mono text-[13px] font-medium"
+      style={{ background: `color-mix(in srgb, ${color} 14%, var(--surface))`, color }}
+    >
+      {monogram(experience.name)}
+    </span>
+  )
+
+// One row of the commit graph: lane lines above/below the dot plus the dot itself.
+const Graph: React.FC<{ lanes: Kind[]; commit: Commit; above: Set<Kind>; below: Set<Kind> }> = ({
+  lanes,
+  commit,
+  above,
+  below,
+}) => (
+  <div aria-hidden className="relative" style={{ width: (lanes.length - 1) * LANE_GAP + 16 }}>
+    {lanes.map((lane, i) => {
+      const x = i * LANE_GAP + 7
+      const color = BRANCHES[lane].color
+      return (
+        <React.Fragment key={lane}>
+          {above.has(lane) && (
+            <span className="absolute top-0 w-[2px] rounded-full" style={{ left: x, height: DOT_Y, background: color }} />
+          )}
+          {below.has(lane) && (
+            <span
+              className="absolute bottom-0 w-[2px] rounded-full"
+              style={{ left: x, top: DOT_Y, background: color }}
+            />
+          )}
+          {lane === commit.kind && (
+            <span
+              className="absolute h-4 w-4 rounded-full border-[2.5px] bg-bg"
+              style={{ left: x - 7, top: DOT_Y - 8, borderColor: color, background: commit.current ? color : undefined }}
+            >
+              {commit.current && (
+                <span className="absolute -inset-[2.5px] animate-ping rounded-full opacity-40" style={{ background: color }} />
+              )}
+            </span>
+          )}
+        </React.Fragment>
+      )
+    })}
+  </div>
+)
+
+const CommitRow: React.FC<{
+  commit: Commit
+  refs: string[]
+  lanes: Kind[]
+  above: Set<Kind>
+  below: Set<Kind>
   open: boolean
   onToggle: () => void
-}> = ({ experience, index, open, onToggle }) => {
-  const { name, logo, location, roles, skills, links, headlineRole } = experience
-  const date = (experience.date ?? roles[0].date).trim()
-  const current = isCurrent(experience)
-  const panelId = `exp-${index}-${name}`.replace(/\W+/g, '-')
+}> = ({ commit, refs, lanes, above, below, open, onToggle }) => {
+  const { experience, kind, date, current, hash } = commit
+  const { name, location, roles, skills, links, headlineRole } = experience
+  const color = BRANCHES[kind].color
+  const panelId = `commit-${hash}`
 
   return (
-    <li className="border-b border-line">
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={open}
-        aria-controls={panelId}
-        className={`frame-pad grid w-full grid-cols-[28px_minmax(0,1fr)_20px] items-center gap-x-3 gap-y-1 py-4 text-left transition-colors hover:bg-well md:gap-x-4 ${COLUMNS} ${open ? 'bg-well' : ''}`}
-      >
-        <span className="row-span-3 self-start pt-0.5 font-mono text-[12px] text-faint md:row-span-1 md:self-center md:pt-0">
-          {index}
-        </span>
-        <span className="text-[15px] font-medium leading-snug text-ink">{headlineRole ?? roles[0].name}</span>
-        <span
-          aria-hidden
-          className={`row-span-3 self-start text-center font-mono text-[15px] text-faint transition-transform duration-300 md:order-last md:row-span-1 md:self-center ${open ? 'rotate-45 text-accent' : ''}`}
+    <li className="flex gap-4 md:gap-6">
+      <Graph lanes={lanes} commit={commit} above={above} below={below} />
+      <div className="min-w-0 flex-1 pb-6">
+        <button
+          type="button"
+          onClick={onToggle}
+          aria-expanded={open}
+          aria-controls={panelId}
+          className={`group -ml-4 flex w-[calc(100%+16px)] flex-col gap-3 rounded-[22px] px-4 py-3 text-left transition-colors duration-300 hover:bg-well ${open ? 'bg-well' : ''}`}
         >
-          +
-        </span>
-        <span className="flex min-w-0 items-center gap-2.5">
-          <span className="relative h-6 w-6 shrink-0 overflow-hidden rounded-[5px] border border-line bg-white">
-            <Image src={`/experiences/${logo}`} alt="" fill sizes="24px" className="object-contain" />
+          <span className="flex flex-wrap items-center gap-x-2 gap-y-1 font-mono text-[11.5px]">
+            <span className="text-series-2">{hash}</span>
+            {refs.map((ref) => (
+              <span
+                key={ref}
+                className={`rounded-full px-2 py-0.5 ${ref.startsWith('HEAD') ? 'bg-accent-soft text-accent' : 'bg-raised text-muted'}`}
+              >
+                {ref}
+              </span>
+            ))}
+            <span className={current ? 'text-live' : 'text-faint'}>{date}</span>
           </span>
-          <span className="truncate text-[14px] text-muted">{name}</span>
-        </span>
-        <span className={`flex items-center gap-2 font-mono text-[12px] ${current ? 'text-live' : 'text-faint'}`}>
-          {current && <StatusDot />}
-          {date}
-        </span>
-      </button>
+          <span className="flex items-center gap-3.5">
+            <Logo experience={experience} color={color} />
+            <span className="min-w-0 flex-1">
+              <span className="block text-[16.5px] font-medium leading-snug text-ink">{headlineRole ?? roles[0].name}</span>
+              <span className="mt-0.5 block truncate text-[14px] text-muted">
+                {name}
+                {location && <span className="text-faint"> · {location}</span>}
+              </span>
+            </span>
+            <span
+              aria-hidden
+              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-mono text-[15px] transition-all duration-300 ${
+                open ? 'rotate-45 bg-accent-soft text-accent' : 'text-faint group-hover:bg-raised'
+              }`}
+            >
+              +
+            </span>
+          </span>
+        </button>
 
-      <div
-        id={panelId}
-        className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
-      >
-        <div className="overflow-hidden">
-          <div className="frame-pad bg-well pb-6 pt-1">
-            <div className="flex flex-col gap-5 pl-[40px] md:pl-[60px]">
-              {location && <p className="font-mono text-[11.5px] text-faint">location = &apos;{location}&apos;</p>}
+        <div
+          id={panelId}
+          className={`grid transition-[grid-template-rows] duration-300 ease-out ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}
+        >
+          <div className="overflow-hidden">
+            <div className="flex flex-col gap-5 pb-2 pl-0 pt-4 sm:pl-[58px]">
               {roles.map((role) => (
-                <div key={role.name + role.date} className="flex max-w-[760px] flex-col gap-2">
-                  {roles.length > 1 && (
+                <div key={role.name + role.date} className="flex max-w-[720px] flex-col gap-2">
+                  {(roles.length > 1 || headlineRole) && (
                     <p className="flex flex-wrap items-baseline gap-x-3 text-[14px] font-medium text-ink">
                       {role.name}
                       <span className="font-mono text-[11.5px] font-normal text-faint">{role.date}</span>
                     </p>
                   )}
-                  <ul className="flex flex-col gap-1.5">
+                  <ul className="flex flex-col gap-2">
                     {role.description?.map((desc) => (
                       <li key={desc} className="flex gap-2.5 text-[14px] leading-relaxed text-muted">
-                        <span aria-hidden className="font-mono text-accent">
+                        <span aria-hidden className="font-mono" style={{ color }}>
                           ›
                         </span>
                         <span>{desc}</span>
@@ -116,68 +238,106 @@ const ExperienceRow: React.FC<{
 }
 
 export const Experiences: React.FC = () => {
-  const [kind, setKind] = useState<Kind>('Work')
-  const [openIndex, setOpenIndex] = useState<number | null>(0)
-  const list = EXPERIENCES[kind]
+  const [filter, setFilter] = useState<Filter>('all')
+  const [openHash, setOpenHash] = useState<string | null>(COMMITS[0]?.hash ?? null)
+  const [showAll, setShowAll] = useState(false)
+
+  const commits = COMMITS.filter((commit) => filter === 'all' || commit.kind === filter)
+  const visible = showAll ? commits : commits.slice(0, INITIAL_VISIBLE)
+  const lanes = (Object.keys(BRANCHES) as Kind[]).filter((kind) => visible.some((commit) => commit.kind === kind))
+  // Each branch line runs from its newest to its oldest commit; it keeps going
+  // past the last row when older commits on that branch are still collapsed.
+  const first = new Map<Kind, number>()
+  const last = new Map<Kind, number>()
+  visible.forEach((commit, index) => {
+    if (!first.has(commit.kind)) first.set(commit.kind, index)
+    last.set(commit.kind, index)
+  })
+  commits.slice(visible.length).forEach((commit) => last.set(commit.kind, Infinity))
+  const command = FILTERS.find((option) => option.value === filter)?.command ?? ''
+
+  // Newest commit per branch carries the branch ref, like `git log --decorate`.
+  const headOf = new Map<Kind, string>()
+  visible.forEach((commit) => !headOf.has(commit.kind) && headOf.set(commit.kind, commit.hash))
+  const refsFor = (commit: Commit) => {
+    if (headOf.get(commit.kind) !== commit.hash) return []
+    const ref = BRANCHES[commit.kind].ref
+    return commit.kind === 'Work' ? [`HEAD -> ${ref}`] : [ref]
+  }
 
   return (
-    <Section id="experiences" innerClassName="">
-      <div className="frame-pad pb-8 pt-20 md:pt-28">
-        <Reveal>
-          <SectionHeader
-            cell={6}
-            code={`experience[experience.type == "${KINDS[kind].query}"]`}
-            title={
-              <>
-                Where I&apos;ve worked,
-                <br className="hidden md:block" /> taught & led.
-              </>
-            }
-            description="Industry roles, teaching assistantships, and student organizations. Open any row for the details."
-          />
-        </Reveal>
-        <Reveal delay={0.1} className="mt-10">
-          <Tabs
-            ariaLabel="Experience type"
-            value={kind}
-            onChange={(value) => {
-              setKind(value)
-              setOpenIndex(0)
-            }}
-            options={(Object.keys(KINDS) as Kind[]).map((key) => ({
-              value: key,
-              label: KINDS[key].label,
-              count: EXPERIENCES[key].length,
-            }))}
-          />
-        </Reveal>
-      </div>
+    <Section
+      id="experiences"
+      className="overflow-hidden"
+      backdrop={<Blob className="-right-40 top-1/3 h-[420px] w-[420px]" />}
+    >
+      <Reveal>
+        <SectionHeader
+          cell={5}
+          code={command}
+          title={
+            <>
+              Where I&apos;ve worked,
+              <br className="hidden md:block" /> taught & led.
+            </>
+          }
+          description="Industry roles, teaching assistantships, and student organizations — one commit at a time. Open any commit for the diff."
+        />
+      </Reveal>
+
+      <Reveal delay={0.1} className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-3">
+        <Tabs
+          ariaLabel="Experience type"
+          value={filter}
+          onChange={(value) => {
+            setFilter(value)
+            setShowAll(false)
+          }}
+          options={FILTERS.map((option) => ({
+            value: option.value,
+            label: option.label,
+            count: option.value === 'all' ? COMMITS.length : EXPERIENCES[option.value].length,
+          }))}
+        />
+        <span className="flex items-center gap-4 font-mono text-[11.5px] text-faint">
+          {(Object.keys(BRANCHES) as Kind[]).map((kind) => (
+            <span key={kind} className="flex items-center gap-1.5">
+              <span className="h-2.5 w-2.5 rounded-full" style={{ background: BRANCHES[kind].color }} />
+              {BRANCHES[kind].ref}
+            </span>
+          ))}
+        </span>
+      </Reveal>
 
       <Reveal delay={0.15}>
-        <div
-          aria-hidden
-          className={`frame-pad hidden h-10 items-center gap-x-4 border-y border-line bg-well font-mono text-[11.5px] text-faint md:grid ${COLUMNS}`}
-        >
-          <span />
-          <span>role</span>
-          <span>organization</span>
-          <span>period</span>
-          <span />
-        </div>
-        <ul className="border-t border-line md:border-t-0">
-          {list.map((experience, index) => (
-            <ExperienceRow
-              key={`${kind}-${experience.name}-${index}`}
-              experience={experience}
-              index={index}
-              open={openIndex === index}
-              onToggle={() => setOpenIndex(openIndex === index ? null : index)}
-            />
-          ))}
-        </ul>
-        <p className="frame-pad py-4 font-mono text-[11.5px] text-faint">
-          {list.length} rows × 4 columns
-        </p>
+        <ol className="mt-12">
+          {visible.map((commit, index) => {
+            const above = new Set(lanes.filter((lane) => first.get(lane)! < index && index <= last.get(lane)!))
+            const below = new Set(lanes.filter((lane) => first.get(lane)! <= index && index < last.get(lane)!))
+            return (
+              <CommitRow
+                key={commit.hash}
+                commit={commit}
+                refs={refsFor(commit)}
+                lanes={lanes}
+                above={above}
+                below={below}
+                open={openHash === commit.hash}
+                onToggle={() => setOpenHash(openHash === commit.hash ? null : commit.hash)}
+              />
+            )
+          })}
+        </ol>
+        {commits.length > INITIAL_VISIBLE && (
+          <div className="mt-2 flex items-center gap-4">
+            <Button variant="secondary" size="sm" onClick={() => setShowAll((v) => !v)}>
+              {showAll ? 'Collapse history' : `Show ${commits.length - INITIAL_VISIBLE} older commits`}
+            </Button>
+            <span className="font-mono text-[11.5px] text-faint">
+              {commits.length} commits on {lanes.length > 1 ? `${lanes.length} branches` : BRANCHES[lanes[0]].ref}
+            </span>
+          </div>
+        )}
       </Reveal>
     </Section>
   )

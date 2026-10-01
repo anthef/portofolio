@@ -9,7 +9,7 @@ export const Ahli: SkillType = {
   },
   CPlusPlus: {
     name: 'C++',
-    logo: '/skills/cplusplus.svg',
+    logo: '/skills/c++.svg',
     link: 'https://isocpp.org/',
     color: '#00599C',
   },
@@ -75,7 +75,7 @@ export const Ahli: SkillType = {
   },
   JavaScript: {
     name: 'JavaScript',
-    logo: '/skills/javascript.svg',
+    logo: '/skills/javascript.png',
     link: 'https://developer.mozilla.org/en-US/docs/Web/JavaScript',
     color: '#F7DF1E',
   },
@@ -93,7 +93,7 @@ export const Ahli: SkillType = {
   },
   NextJS: {
     name: 'Next.js',
-    logo: '/skills/nextjs.svg',
+    logo: '/skills/nextjs.png',
     link: 'https://nextjs.org/',
     color: '#000000',
   },
@@ -111,13 +111,13 @@ export const Ahli: SkillType = {
   },
   React: {
     name: 'React',
-    logo: '/skills/react.svg',
+    logo: '/skills/react.png',
     link: 'https://reactjs.org/',
     color: '#61DAFB',
   },
   TailwindCSS: {
     name: 'Tailwind CSS',
-    logo: '/skills/tailwindcss.svg',
+    logo: '/skills/tailwind.png',
     link: 'https://tailwindcss.com/',
     color: '#38B2AC',
   },
@@ -129,7 +129,7 @@ export const Ahli: SkillType = {
   },
   TypeScript: {
     name: 'TypeScript',
-    logo: '/skills/typescript.svg',
+    logo: '/skills/typescript.png',
     link: 'https://www.typescriptlang.org/',
     color: '#007ACC',
   },

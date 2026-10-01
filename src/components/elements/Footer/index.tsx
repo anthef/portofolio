@@ -1,65 +1,84 @@
-import Image from 'next/image';
-import React from 'react';
-import { CONTACTS } from '@constants';
-import { FiDownload as Download } from 'react-icons/fi';
+import React from 'react'
+import { FiDownload } from 'react-icons/fi'
+import { CONTACTS, CV_URL } from '@constants'
+import { Arrow, Button } from '../Button'
+import { Section, SectionHeader } from '../Section'
 
 export const Footer: React.FC = () => {
-  return (
-    <>
-      <div className="flex w-full select-none flex-col items-center justify-between bg-primary py-4 px-5 md:flex-row md:py-8 md:px-16 animate-fadeIn bg-[#123655]">
-        <div className="flex flex-col items-center justify-center text-center md:flex-row md:text-left gap-4 text-white max-w-full md:max-w-[60%] lg:max-w-[40%]">
-          <Image
-            src="/profile/icon.png"
-            alt="logo"
-            width={50}
-            height={50}
-            className="rounded-full animate-bounce hover:scale-105 transition-all duration-300"
-          />
-          <div className="flex flex-col gap-2">
-            <div className="flex">
-              <h3 className="text-base md:text-md lg:text-md shimmer-text">
-                {new Date().getFullYear()} Anthony Edbert Feriyanto. All rights reserved
-              </h3>
-            </div>
-            <p className="text-xs md:text-sm lg:text-base text-white">
-              Created by{' '}
-              <a
-                href=""
-                target="_blank"
-                rel="noreferrer"
-                className="text-secondary underline underline-offset-4 font-bold hover:text-white transition-colors duration-300"
-              >
-                Anthony Edbert Feriyanto
-              </a>
-            </p>
-          </div>
-        </div>
+  const email = CONTACTS.find((contact) => contact.name === 'Email')
 
-        <div className="mt-6 flex select-none flex-col items-center md:items-end md:mt-0">
-          <div className="flex gap-4 mb-4 justify-center md:justify-start">
-            {CONTACTS.map((contact, index) => (
-              <a
-                key={contact.name}
-                href={contact.url}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-2 hover:scale-125 transition-all cursor-pointer animate-fadeIn"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                {contact.icon}
-              </a>
-            ))}
+  return (
+    <footer id="contact" className="relative">
+      <Section innerClassName="frame-pad py-24 md:py-32">
+        <div aria-hidden className="graph-paper fade-y pointer-events-none absolute inset-0" />
+        <SectionHeader
+          className="relative"
+          align="center"
+          cell={10}
+          code={`anthony.contact(topic="your next project")`}
+          title={
+            <>
+              Let&apos;s build
+              <br />
+              something together.
+            </>
+          }
+          description="Open to conversations about data science, machine learning, and full-stack product work."
+        >
+          <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
+            {email && (
+              <Button href={email.url}>
+                Email me <Arrow />
+              </Button>
+            )}
+            <Button href={CV_URL} target="_blank" rel="noreferrer" variant="secondary">
+              <FiDownload size={15} />
+              Download resume
+            </Button>
           </div>
-          <a
-            href="/documents/CV - Anthony Edbert Feriyanto.pdf"
-            download="Anthony_Edbert_Feriyanto_CV.pdf"
-            className="flex items-center gap-2 px-4 py-2 md:px-6 md:py-3 bg-secondary text-white rounded-lg font-bold shadow-lg hover:bg-secondary-dark transition-all transform hover:scale-105 active:scale-95 border border-white text-sm md:text-base"
-          >
-            <Download size={15} className="mr-2" /> 
-            <div className='text-xs'>View CV</div>
-          </a>
+        </SectionHeader>
+      </Section>
+
+      <div className="frame border-t border-line">
+        <ul className="cell-grid grid-cols-2 border-y-0 sm:grid-cols-3 lg:grid-cols-6">
+          {CONTACTS.map((contact, index) => {
+            const Icon = contact.icon
+            return (
+              <li key={contact.name}>
+                <a
+                  href={contact.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex h-full flex-col gap-4 px-5 py-5 transition-colors hover:bg-well md:px-6"
+                >
+                  <span className="flex items-center justify-between">
+                    <span className="font-mono text-[11px] text-faint">[{index}]</span>
+                    <Icon size={16} className="text-muted transition-colors group-hover:text-accent" />
+                  </span>
+                  <span className="flex flex-col gap-0.5">
+                    <span className="flex items-center gap-1.5 text-[14px] text-ink">
+                      {contact.name}
+                      <span className="text-faint transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent">
+                        ↗
+                      </span>
+                    </span>
+                    <span className="truncate font-mono text-[11.5px] text-faint">{contact.handle}</span>
+                  </span>
+                </a>
+              </li>
+            )
+          })}
+        </ul>
+      </div>
+
+      <div className="frame border-t border-line">
+        <div className="frame-pad flex flex-col gap-2 py-6 font-mono text-[11.5px] text-faint sm:flex-row sm:items-center sm:justify-between">
+          <span>© {new Date().getFullYear()} Anthony Edbert Feriyanto</span>
+          <span>
+            <span className="text-accent">[*]</span> end of notebook — thanks for scrolling
+          </span>
         </div>
       </div>
-    </>
-  );
-};
+    </footer>
+  )
+}

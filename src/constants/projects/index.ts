@@ -19,7 +19,7 @@ export const PROJECTS = [
   },
   {
     name: "Anthony's Portfolio Website",
-    image: 'tba.png',
+    image: 'portfolio.webp',
     date: '2025 - Present',
     description:
       'Built a dynamic website showcasing my experiences and projects, and updated its desktop-optimized design to be fully responsive across devices — now redesigned as an interactive data-science notebook.',

@@ -2,19 +2,25 @@ import React from 'react'
 import { FiDownload } from 'react-icons/fi'
 import { CONTACTS, CV_URL } from '@constants'
 import { Arrow, Button } from '../Button'
-import { Section, SectionHeader } from '../Section'
+import { Blob, Section, SectionHeader } from '../Section'
 
 export const Footer: React.FC = () => {
   const email = CONTACTS.find((contact) => contact.name === 'Email')
 
   return (
-    <footer id="contact" className="relative">
-      <Section innerClassName="frame-pad py-24 md:py-32">
-        <div aria-hidden className="graph-paper fade-y pointer-events-none absolute inset-0" />
+    <footer id="contact" className="relative overflow-hidden">
+      <Section
+        innerClassName="pb-14 pt-24 md:pt-32"
+        backdrop={
+          <>
+            <Blob className="-bottom-24 left-[12%] h-72 w-72" />
+            <Blob className="-bottom-32 right-[14%] h-80 w-80" color="var(--series-2)" />
+            <Blob className="bottom-10 left-1/2 h-56 w-56 -translate-x-1/2" color="var(--series-3)" />
+          </>
+        }
+      >
         <SectionHeader
-          className="relative"
-          align="center"
-          cell={10}
+          cell={9}
           code={`anthony.contact(topic="your next project")`}
           title={
             <>
@@ -23,9 +29,9 @@ export const Footer: React.FC = () => {
               something together.
             </>
           }
-          description="Open to conversations about data science, machine learning, and full-stack product work."
+          description="Open to conversations about AI/LLM engineering, data science, and full-stack product work."
         >
-          <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-3 flex flex-wrap items-center gap-3">
             {email && (
               <Button href={email.url}>
                 Email me <Arrow />
@@ -36,49 +42,37 @@ export const Footer: React.FC = () => {
               Download resume
             </Button>
           </div>
-        </SectionHeader>
-      </Section>
 
-      <div className="frame border-t border-line">
-        <ul className="cell-grid grid-cols-2 border-y-0 sm:grid-cols-3 lg:grid-cols-6">
-          {CONTACTS.map((contact, index) => {
-            const Icon = contact.icon
-            return (
-              <li key={contact.name}>
-                <a
-                  href={contact.url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex h-full flex-col gap-4 px-5 py-5 transition-colors hover:bg-well md:px-6"
-                >
-                  <span className="flex items-center justify-between">
-                    <span className="font-mono text-[11px] text-faint">[{index}]</span>
-                    <Icon size={16} className="text-muted transition-colors group-hover:text-accent" />
-                  </span>
-                  <span className="flex flex-col gap-0.5">
-                    <span className="flex items-center gap-1.5 text-[14px] text-ink">
-                      {contact.name}
-                      <span className="text-faint transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent">
-                        ↗
-                      </span>
+          <ul className="mt-10 flex flex-wrap gap-2">
+            {CONTACTS.map((contact) => {
+              const Icon = contact.icon
+              return (
+                <li key={contact.name}>
+                  <a
+                    href={contact.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="card-shadow group flex h-11 items-center gap-2.5 rounded-full bg-surface pl-2 pr-4 transition-transform duration-300 ease-out hover:-translate-y-0.5"
+                  >
+                    <span className="flex h-7 w-7 items-center justify-center rounded-full bg-well text-muted transition-colors group-hover:bg-accent-soft group-hover:text-accent">
+                      <Icon size={14} />
                     </span>
-                    <span className="truncate font-mono text-[11.5px] text-faint">{contact.handle}</span>
-                  </span>
-                </a>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
+                    <span className="text-[14px] text-ink">{contact.name}</span>
+                    <span className="hidden font-mono text-[11.5px] text-faint md:inline">{contact.handle}</span>
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+        </SectionHeader>
 
-      <div className="frame border-t border-line">
-        <div className="frame-pad flex flex-col gap-2 py-6 font-mono text-[11.5px] text-faint sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-20 flex flex-col gap-2 font-mono text-[11.5px] text-faint sm:flex-row sm:items-center sm:justify-between">
           <span>© {new Date().getFullYear()} Anthony Edbert Feriyanto</span>
           <span>
             <span className="text-accent">[*]</span> end of notebook — thanks for scrolling
           </span>
         </div>
-      </div>
+      </Section>
     </footer>
   )
 }

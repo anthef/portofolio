@@ -14,7 +14,7 @@ import {
   StatusDot,
 } from '@elements'
 
-const ROLES = ['Data Scientist', 'Full Stack Engineer']
+const ROLES = ['AI / LLM Engineer', 'Software Engineer', 'Data Scientist']
 
 // Types, holds, deletes and cycles through `words`. Starts fully typed so the
 // server render (and no-JS visitors) see a complete phrase.
@@ -118,8 +118,8 @@ export const About: React.FC = () => {
 
             <Reveal onLoad delay={0.15}>
               <p className="mt-6 max-w-[520px] text-[16px] leading-relaxed text-muted md:text-[17px]">
-                Information Systems undergraduate at Universitas Indonesia, working across machine learning and
-                full-stack web development.
+                Computer Science student at Universitas Indonesia (cGPA 4.00) and full-time software engineer — building
+                LLM systems, machine learning, and large-scale software in production.
               </p>
             </Reveal>
 
@@ -196,7 +196,7 @@ export const About: React.FC = () => {
                 <table className="w-full font-mono text-[12.5px] leading-5">
                   <tbody>
                     <SummaryRow label="name">Anthony Edbert Feriyanto</SummaryRow>
-                    <SummaryRow label="role">Data Scientist · Full Stack Engineer</SummaryRow>
+                    <SummaryRow label="role">Software Engineer · AI / LLM Engineer · Data Scientist</SummaryRow>
                     {currentRoles.map(({ role, at }) => (
                       <SummaryRow key={`${role}-${at}`} label="now">
                         {role} <span className="text-faint">@</span> {at}

@@ -31,6 +31,7 @@
   --tick: #b9b3a4;
   --shadow: 0 1px 0 rgba(11, 18, 32, 0.04), 0 10px 30px -18px rgba(11, 18, 32, 0.25);
   --selection: rgba(14, 124, 135, 0.2);
+  --blob-opacity: 0.35;
 
   color-scheme: light;
 }
@@ -59,6 +60,7 @@
   --tick: rgba(150, 196, 220, 0.28);
   --shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 18px 40px -24px rgba(0, 0, 0, 0.9);
   --selection: rgba(95, 224, 214, 0.25);
+  --blob-opacity: 0.18;
 
   color-scheme: dark;
 }
@@ -88,41 +90,24 @@
 }
 
 @layer components {
-  /*
-   * The page frame: a centered column whose side rails carry ruler ticks,
-   * so the whole page reads like a sheet of measured graph paper.
-   */
+  /* Centered content column. */
   .frame {
-    @apply relative mx-auto w-full max-w-frame md:border-x md:border-line;
-  }
-  @media (min-width: 768px) {
-    .frame::before,
-    .frame::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 9px;
-      pointer-events: none;
-      background-image:
-        repeating-linear-gradient(to bottom, var(--tick) 0 1px, transparent 1px 16px),
-        repeating-linear-gradient(to bottom, var(--tick) 0 1px, transparent 1px 80px);
-      background-repeat: no-repeat;
-    }
-    .frame::before {
-      left: 0;
-      background-size: 4px 100%, 9px 100%;
-      background-position: left top, left top;
-    }
-    .frame::after {
-      right: 0;
-      background-size: 4px 100%, 9px 100%;
-      background-position: right top, right top;
-    }
+    @apply relative mx-auto w-full max-w-frame;
   }
 
   .frame-pad {
-    @apply px-5 md:px-12;
+    @apply px-5 md:px-10;
+  }
+
+  /*
+   * Notebook layout: on large screens content sits right of a gutter that
+   * holds the `In [n]:` prompts, separated by a dashed margin line.
+   */
+  .nb-body {
+    @apply lg:pl-[132px];
+  }
+  .nb-gutter {
+    @apply lg:-ml-[132px] lg:grid lg:grid-cols-[92px_minmax(0,1fr)] lg:gap-x-10;
   }
 
   .mono-meta {
@@ -140,15 +125,23 @@
   }
 
   /* Hairline grid: children sit on --bg, the 1px gaps show --line. */
-  .cell-grid {
-    @apply grid gap-px border-y border-line bg-line;
-  }
-  .cell-grid > * {
-    @apply bg-bg;
+  /* Dotted paper, a softer alternative to the graph-paper grid. */
+  .dot-paper {
+    background-image: radial-gradient(var(--grid-major) 1.2px, transparent 1.2px);
+    background-size: 18px 18px;
   }
 
   .card-shadow {
     box-shadow: var(--shadow);
+  }
+
+  /* Soft organic colour field. */
+  .blob {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 9999px;
+    filter: blur(60px);
+    opacity: var(--blob-opacity);
   }
 }
 

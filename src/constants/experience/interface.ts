@@ -13,7 +13,7 @@ interface LinkType {
 
 export interface SingularExperienceType {
     name : string
-    logo : string
+    logo? : string
     date? : string
     roles : RoleType[]
     location? : string

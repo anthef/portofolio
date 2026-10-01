@@ -3,16 +3,33 @@ import { SingularExperienceType } from './interface'
 
 const OrgExperience: SingularExperienceType[] = [
   {
-    name: 'RISTEK UI 2024',
+    name: 'RISTEK Fasilkom UI',
     logo: 'ristek.png',
-    links: [{ name: 'Instagram', link: 'https://www.ristek.cs.ui.ac.id/' }],
-    date: 'Maret 2025 - Maret 2026',
-    location: 'Jakarta, Indonesia',
+    links: [{ name: 'Website', link: 'https://www.ristek.cs.ui.ac.id/' }],
+    location: 'South Jakarta, Indonesia',
     roles: [
       {
-        name: 'Member of Data Science & Artificial Intelligence SIG',
-        date: 'Maret 2025 - Maret 2026',
+        name: 'Lead of Data Science & AI SIG',
+        date: 'Jan 2025 - Present',
         description: [
+          'Served as a problem setter for Datathon 2025 events, designing real-world inspired challenges and datasets.',
+          'Skilled in Machine Learning (ML), Deep Learning (DL), Natural Language Processing (NLP), and Reinforcement Learning.',
+          'Best Member of Data Science & AI SIG.',
+          'Developed a predictive model to estimate Estimated Time of Arrival (ETA) for the main transportation system within the University of Indonesia campus, utilizing historical data and predictive algorithms.',
+        ],
+      },
+    ],
+    skills: [Ahli.Python],
+  },
+  {
+    name: 'Google Developer Universitas Indonesia Student Club',
+    location: 'South Jakarta, Indonesia',
+    roles: [
+      {
+        name: 'Data Scientist Member',
+        date: 'Jan 2023 - Present',
+        description: [
+          'Grow my knowledge in a peer-to-peer learning environment and build solutions for local businesses and their community.',
         ],
       },
     ],
@@ -22,13 +39,13 @@ const OrgExperience: SingularExperienceType[] = [
     name: 'COMPFEST 16',
     logo: 'compfest.jpeg',
     links: [{ name: 'Instagram', link: 'https://www.instagram.com/compfest/' }],
-    date: 'May 2024 - Jan 2025',
-    location: 'Jakarta, Indonesia',
+    location: 'South Jakarta, Indonesia',
     roles: [
       {
         name: 'Staff of Data Science Academy',
-        date: 'May 2024 - Jan 2025',
+        date: 'Feb 2024 - Dec 2024',
         description: [
+          'Reached out to potential mentors from various companies to participate in events and programs, strengthening industry-academic collaboration.',
         ],
       },
     ],
@@ -38,15 +55,14 @@ const OrgExperience: SingularExperienceType[] = [
     name: 'Open House Fasilkom UI',
     logo: 'oh.jpeg',
     links: [{ name: 'Instagram', link: 'https://oh.cs.ui.ac.id/' }],
-    date: 'Aug 2023 - Jan 2024',
-    location: 'Jakarta, Indonesia',
+    location: 'South Jakarta, Indonesia',
     roles: [
       {
-        name: 'Staff of Human Resources',
-        date: 'Aug 2023 - Dec 2023',
+        name: 'Human Resources & Event’s Expert Staff',
+        date: 'Aug 2023 - Nov 2023',
         description: [
-          'Managed 11 members of Event division for Open House Fasilkom UI',
-          'Was responsible for selecting more than 60 candidates for Event Division members'
+          'Guided and managed a dynamic team of 11 in the Event Division, steering the ship for the successful execution of Open House Fasilkom UI.',
+          'Was responsible for selecting more than 60 candidates for Event Division members.',
         ],
       },
     ],
@@ -56,13 +72,13 @@ const OrgExperience: SingularExperienceType[] = [
     name: 'UI Talks',
     logo: 'uitalks.jpeg',
     links: [{ name: 'Instagram', link: 'https://www.instagram.com/ui.talks/' }],
-    date: 'Aug 2023 - Jan 2024',
-    location: 'Jakarta, Indonesia',
+    location: 'Depok, Indonesia',
     roles: [
       {
         name: 'Staff of Business Competition',
-        date: 'Aug 2023 - Dec 2023',
+        date: 'Aug 2023 - Nov 2023',
         description: [
+          'Spearheaded the meticulous coordination of over 50 candidates for the national business plan competition, demonstrating adept organizational skills and ensuring a stellar showcase of entrepreneurial talent.',
         ],
       },
     ],
@@ -72,13 +88,13 @@ const OrgExperience: SingularExperienceType[] = [
     name: 'BEM Fakultas Ilmu Komputer Universitas Indonesia',
     logo: 'bem.jpeg',
     links: [{ name: 'Instagram', link: 'https://www.instagram.com/bemfasilkomui/' }],
-    date: 'Sept 2023 - Dec 2023',
-    location: 'Jakarta, Indonesia',
+    location: 'South Jakarta, Indonesia',
     roles: [
       {
-        name: 'Software Engineer Intern',
-        date: 'Sept 2023 - Dec 2023',
+        name: 'Software Engineer (Internship)',
+        date: 'Sep 2023 - Nov 2023',
         description: [
+          'Collaborated seamlessly with the creative team to strategize, develop, and launch engaging web pages across the organization’s website.',
         ],
       },
     ],
@@ -88,7 +104,6 @@ const OrgExperience: SingularExperienceType[] = [
     name: 'COMPFEST 15',
     logo: 'compfest.jpeg',
     links: [{ name: 'Instagram', link: 'https://www.instagram.com/compfest/' }],
-    date: 'Jan 2021 - Oct 2021',
     location: 'Jakarta, Indonesia',
     roles: [
       {
@@ -105,7 +120,6 @@ const OrgExperience: SingularExperienceType[] = [
     name: 'Extracurricular Robotics Club 28',
     logo: 'robotik28.jpeg',
     links: [{ name: 'Website', link: 'https://www.aseanroboticday.com/' }],
-    date: 'Jan 2021 - Oct 2021',
     location: 'Jakarta, Indonesia',
     roles: [
       {

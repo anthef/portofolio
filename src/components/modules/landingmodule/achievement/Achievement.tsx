@@ -15,8 +15,9 @@ const MEDALS: Record<Medal, { rank: number; label: string; color: string }> = {
   bronze: { rank: 3, label: '3rd_place', color: '#b8692e' },
   '4th': { rank: 4, label: '4th_place', color: 'var(--accent)' },
   '5th': { rank: 5, label: '5th_place', color: 'var(--accent)' },
-  'top-10': { rank: 6, label: 'top_10', color: 'var(--series-3)' },
-  unranked: { rank: 7, label: 'honorable', color: 'var(--faint)' },
+  '6th': { rank: 6, label: '6th_place', color: 'var(--accent)' },
+  'top-10': { rank: 7, label: 'top_10', color: 'var(--series-3)' },
+  unranked: { rank: 8, label: 'honorable', color: 'var(--faint)' },
 }
 
 const LEVELS: { value: Level; label: string }[] = [
@@ -133,7 +134,7 @@ export const Achievement: React.FC = () => {
   const sorted = useMemo(
     () =>
       ACHIEVEMENTS.filter((a) => matchesLevel(a, level)).sort((a, b) => {
-        const diff = (MEDALS[a.medal]?.rank ?? 7) - (MEDALS[b.medal]?.rank ?? 7)
+        const diff = (MEDALS[a.medal]?.rank ?? 8) - (MEDALS[b.medal]?.rank ?? 8)
         return bestFirst ? diff : -diff
       }),
     [level, bestFirst]

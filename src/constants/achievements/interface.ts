@@ -5,7 +5,7 @@ export interface AchievementType {
   issuer: string
   image?: string
   date: string
-  medal: 'gold' | 'silver' | 'bronze' | '4th' | '5th' | 'top-10' | 'unranked'
+  medal: 'gold' | 'silver' | 'bronze' | '4th' | '5th' | '6th' | 'top-10' | 'unranked'
   description?: string
   skills: SkillSet[] 
   links?: LinkType[]

@@ -3,7 +3,87 @@ import { Ahli } from '../Skills'
 
 export const ACHIEVEMENTS: AchievementType[] = [
   {
-    name: '1st Winner of Internation Data Science FIT Competition',
+    name: '2nd Place of ASEAN AI Hackathon 2026',
+    issuer: 'ASEAN AI Hackathon',
+    date: '2026',
+    medal: 'silver',
+    description:
+      'Built Wicara, a prerequisite-first adaptive AI tutor for ASEAN learners that diagnoses the missing foundational concept behind a student’s struggle before teaching, powered by a curriculum graph of 391 concepts and 521 prerequisite relationships combined with adaptive pre-tests, mastery tracking, multimodal input, AI-generated visual lessons, and a teacher-in-the-loop system.',
+    skills : [],
+    jenjang : 'university'
+  },
+  {
+    name: '1st Winner and People’s Choice Award of Samsung Solve for Tomorrow',
+    issuer: 'Samsung Solve for Tomorrow',
+    date: '2025',
+    medal: 'gold',
+    description:
+      'Developed AI-powered vision glasses for visually impaired runners that integrate three models, YOLO, U-Net, and SC Depth, to assist navigation on a jogging track.',
+    skills : [Ahli.Python],
+    jenjang : 'university'
+  },
+  {
+    name: 'Global Ambassador of Samsung Solve for Tomorrow Global',
+    issuer: 'Samsung',
+    date: '2025',
+    medal: 'unranked',
+    description:
+      'Selected as a global ambassador representing Indonesia in a prestigious innovation program by Samsung, contributing to the development of AI-powered vision glasses for visually impaired runners, integrating YOLO, U-Net, and depth estimation models to enhance real-time navigation and safety.',
+    skills : [Ahli.Python],
+    jenjang : 'university'
+  },
+  {
+    name: '2nd Runner Up of Google Developer Fest Jakarta',
+    issuer: 'Google Developer Fest Jakarta',
+    date: '2025',
+    medal: 'bronze',
+    description:
+      'Achieved 2nd place in a competitive developer event by developing a digital financial bookkeeping system integrated with automated credit scoring and an interactive dashboard, demonstrating strong technical implementation and real-world impact in financial technology.',
+    skills : [],
+    jenjang : 'university'
+  },
+  {
+    name: 'Honorable Mention of GEMASTIK Data Mining',
+    issuer: 'GEMASTIK 2025',
+    date: '2025',
+    medal: 'unranked',
+    description:
+      'Received national-level recognition for developing a Graph-of-Graphs-based classification model for cooperative analysis, combined with an OCR system for Javanese script, demonstrating innovation in graph-based machine learning and low-resource language processing.',
+    skills : [Ahli.Python],
+    jenjang : 'university'
+  },
+  {
+    name: 'CIMB Niaga Scholarship Awardee',
+    issuer: 'CIMB Niaga',
+    date: '2025',
+    medal: 'unranked',
+    description:
+      'Selected as one of 50 awardees from over 20,000 applicants nationwide, recognizing outstanding academic performance, leadership potential, and achievements in AI-driven innovation.',
+    skills : [],
+    jenjang : 'university'
+  },
+  {
+    name: '6th Winner of Datavidia Competition, Arkavidia 9.0',
+    issuer: 'Arkavidia 9.0',
+    date: '2025',
+    medal: '6th',
+    description:
+      'Built a Mixture-of-Experts ensemble that outperformed 300+ teams in Airbnb hotel price prediction by leveraging specialized sub-models and engineered text features.',
+    skills : [Ahli.Python],
+    jenjang : 'university'
+  },
+  {
+    name: 'Best Web Project Award in PBP Course & Copyright Holder of a Monolithic Django-Based Application',
+    issuer: 'Faculty of Computer Science, Universitas Indonesia',
+    date: '2024',
+    medal: 'unranked',
+    description:
+      'Recognized as the best web project in the Perancangan dan Pemrograman Berbasis Platform (PBP) course for developing a fully functional monolithic web application using the Django framework.',
+    skills : [Ahli.Django, Ahli.Python],
+    jenjang : 'university'
+  },
+  {
+    name: '1st Winner of International Data Science FIT Competition',
     issuer:
       'FIT Competition, Universitas Kristen Satya Wacana',
     image: 'fit_compe.jpg',
@@ -21,14 +101,14 @@ export const ACHIEVEMENTS: AchievementType[] = [
     jenjang : 'university'
   },
   {
-    name: '2nd Winner of Internation Data Science FIT Competition',
+    name: '2nd Winner of Open the Gate Hackathon',
     issuer:
-      'FIT Competition, Universitas Kristen Satya Wacana',
+      'BSS Parking',
     image: 'bss.png',
     date: 'July 2025',
     medal: 'silver',
     description:
-      '•	I developed a parking monitoring dashboard system integrated with a custom gate device powered by Raspberry Pi. The system uses a YOLO-based model for real-time license plate detection to automate vehicle entry and exit.',
+      'Developed a parking monitoring dashboard system integrated with a custom gate device powered by Raspberry Pi. The system uses a YOLO-based model for real-time license plate detection to automate vehicle entry and exit.',
     links: [
       {
         name: 'Announcement',
@@ -36,24 +116,6 @@ export const ACHIEVEMENTS: AchievementType[] = [
       },
     ],
     skills : [Ahli.Python, Ahli.NextJS, Ahli.NodeJS],
-    jenjang : 'university'
-  },
-  {
-    name: 'Top 10 Team of Data Science Academy COMPFEST 15',
-    issuer:
-      'BSS Parking',
-    image: 'dsa_comp.jpg',
-    date: 'Aug 2023',
-    medal: 'top-10',
-    description:
-      'Chosen as one of the top 10 teams out of 250+ participants by conducting research on the effectiveness of flood management across two different periods.',
-    links: [
-      {
-        name: 'Certificate',
-        link: 'https://drive.google.com/file/d/1bdwcbxpQBn2cG31iMpt3Le0q6ZGQxOa9/view?usp=sharing',
-      },
-    ],
-    skills : [Ahli.Python],
     jenjang : 'university'
   },
   {
@@ -168,7 +230,7 @@ export const ACHIEVEMENTS: AchievementType[] = [
     date: 'Jan 2025',
     medal: '4th',
     description:
-      'Overcame 220+ teams by developing a human fall detection system utilizing an ensemble approach combining LightGBM and ResNet. This method effectively identified and analyzed fall events with high accuracy, showcasing the power of integrating machine learning and deep learning techniques.',
+      'Triumphed over 220+ teams by developing an advanced human fall detection system that combined temporal and non-temporal approaches through a hybrid ensemble of LightGBM and ResNet.',
     links: [
       {
         name: 'Slides',
@@ -186,7 +248,7 @@ export const ACHIEVEMENTS: AchievementType[] = [
     date: 'Aug 2024',
     medal: '4th',
     description:
-      'Achieved a top 4 position by solving the problem of developing an e-commerce product retrieval system based on product functionality and brand, enhanced with a bundling feature.',
+      'Leveraged ColBERT to achieve an MRR of 0.97, enabling precise product matching by usage, brand context, and bundling to enhance e-commerce search.',
     links: [
       {
         name: 'Slides',
@@ -288,7 +350,7 @@ export const ACHIEVEMENTS: AchievementType[] = [
     date: 'Jan 2024',
     medal: 'bronze',
     description:
-      'Overcome other 120+ teams with proposed multi-layered stacking machine learning models to estimate the CO2 vehicle emissions in Indonesia.',
+      'Outperformed 120+ teams by developing a custom deep learning architecture within a multi-layer stacking ensemble to accurately estimate CO₂ vehicle emissions in Indonesia.',
     links: [
       {
         name: 'Slides',
@@ -314,7 +376,7 @@ export const ACHIEVEMENTS: AchievementType[] = [
     date: 'Nov 2023',
     medal: 'bronze',
     description:
-      'Overcome other 30+ teams with CatBoost models for predicting car prices in Indonesia.',
+      'Outperformed 30+ teams by using CatBoost with custom weighting on the “Type” feature to accurately predict Indonesian car prices.',
     links: [
       {
         name: 'Certificate',

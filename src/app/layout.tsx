@@ -1,31 +1,28 @@
-import type { Metadata } from "next";
-import { Inter, Poppins, Manrope, Sora } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
+import { GeistMono } from "geist/font/mono";
+import { GeistPixelLine } from "geist/font/pixel";
 import "./globals.css";
 import { Navbar, Footer } from '@elements'
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from "@vercel/speed-insights/next"
 
 
-const manrope = Manrope({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-manrope",
-  weight: ["200", "300", "400", "500", "600", "700", "800"],
+  variable: "--font-inter",
+  display: "swap",
 });
-const inter = Inter({ 
-  subsets: ["latin"] , 
-  variable:'--font-inter',
-  weight: ['100','200','300','400','500','600','700','800']
-});
-const poppins = Poppins({
-  subsets:["latin"], 
-  variable:'--font-poppins', 
-  weight:['100', '200', '300', '400', '500', '600', '700', '800', '900']
-});
-const sora = Sora({
-  subsets:['latin'], 
-  variable:'--font-sora',
-  weight:['100', '200', '300', '400', '500', '600', '700', '800']
-})
+
+// Runs before paint so a stored theme choice is applied without a flash.
+// Light is the default; dark only applies when the visitor picked it.
+const themeScript = `(function(){try{document.documentElement.dataset.theme=localStorage.getItem('theme')==='dark'?'dark':'light'}catch(e){document.documentElement.dataset.theme='light'}})()`;
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#f6f5f1",
+};
 
 export const metadata: Metadata = {
   title: "Anthony Edbert Feriyanto | Full Stack Developer & Data Scientist",
@@ -85,12 +82,15 @@ export default function RootLayout({
   
 }>) {
   return (
-    <html lang="en" className="scroll-smooth h-full">
+    <html
+      lang="en"
+      className={`scroll-smooth ${inter.variable} ${GeistMono.variable} ${GeistPixelLine.variable}`}
+      suppressHydrationWarning
+    >
       <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <link rel="icon" href="/profile/icon.png" />
         <link rel="canonical" href="https://anthony-portofolio.vercel.app" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <meta name="theme-color" content="#000F2B" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -121,9 +121,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={` ${manrope.variable} ${inter.variable} ${sora.variable} ${poppins.variable} bg-[#000F2B] items-center min-w-screen flex flex-col min-h-screen relative`}>
+      <body className="relative flex min-h-screen flex-col overflow-x-hidden">
         <Navbar />
-        <main>
+        <main className="flex-1">
           {children}
           <Analytics/>
           <SpeedInsights/>

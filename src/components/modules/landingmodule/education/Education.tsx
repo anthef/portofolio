@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { EDUCATION } from '@constants'
-import { Reveal, Section, SectionHeader } from '@elements'
+import { Reveal, Section, SectionHeader, Tag } from '@elements'
 
 const SERIES = ['var(--accent)', 'var(--series-2)', 'var(--series-3)', 'var(--muted)']
 
@@ -34,9 +34,9 @@ const useNowYear = () => {
 // Year gridlines + today marker drawn behind every bar track.
 const Track: React.FC<{ now: number | null; children?: React.ReactNode }> = ({ now, children }) => (
   <div
-    className="relative h-10 border-r border-line"
+    className="relative h-10"
     style={{
-      backgroundImage: 'linear-gradient(90deg, var(--line) 1px, transparent 1px)',
+      backgroundImage: 'linear-gradient(90deg, var(--grid-major) 1px, transparent 1px)',
       backgroundSize: `calc(100% / ${AXIS_YEARS}) 100%`,
     }}
   >
@@ -53,7 +53,7 @@ export const Education: React.FC = () => {
     <Section id="education">
       <Reveal>
         <SectionHeader
-          cell={8}
+          cell={7}
           code={`plt.barh(schools, width=duration, left=start)`}
           title="Where I studied."
           description="From SDN Pondok Labu to the Faculty of Computer Science at Universitas Indonesia."
@@ -61,40 +61,65 @@ export const Education: React.FC = () => {
       </Reveal>
 
       <Reveal delay={0.1} className="mt-12">
-        <ol className="border-t border-line">
-          {spans.map((education, index) => (
-            <li key={education.institution} className={`${ROW} border-b border-line py-4`}>
-              <div className="flex min-w-0 items-center gap-3.5">
-                <span className="relative h-11 w-11 shrink-0 overflow-hidden rounded-[8px] border border-line bg-white">
-                  <Image src={education.image} alt="" fill sizes="44px" className="object-cover" />
-                </span>
-                <span className="min-w-0">
-                  <span className="block text-[15.5px] font-medium leading-tight text-ink">{education.title}</span>
-                  <span className="block truncate text-[13.5px] text-muted">{education.institution}</span>
-                  <span className="block font-mono text-[11.5px] text-faint md:hidden">
-                    {education.start} — {education.end}
+        <ol className="flex flex-col gap-2">
+          {spans.map((education, index) => {
+            const color = SERIES[index % SERIES.length]
+            // Anything after today is still "expected", drawn hatched.
+            const doneUntil = now !== null ? Math.min(Math.max(now, education.start), education.end) : education.end
+            return (
+              <li key={education.institution} className={`${ROW} py-3`}>
+                <div className="flex min-w-0 items-center gap-3.5">
+                  <span className="card-shadow relative h-11 w-11 shrink-0 overflow-hidden rounded-full bg-white">
+                    <Image src={education.image} alt="" fill sizes="44px" className="object-cover" />
                   </span>
-                </span>
-              </div>
-              <Track now={now}>
-                <span
-                  className="absolute inset-y-[7px] flex items-center overflow-hidden rounded-[4px] px-2.5 font-mono text-[11px] text-on-inverse"
-                  style={{
-                    left: pos(education.start),
-                    width: `calc(${pos(education.end)} - ${pos(education.start)})`,
-                    background: SERIES[index % SERIES.length],
-                  }}
-                >
-                  <span className="hidden truncate sm:inline">
-                    {education.start} → {education.end}
+                  <span className="min-w-0">
+                    <span className="block text-[15.5px] font-medium leading-tight text-ink">{education.title}</span>
+                    <span className="block truncate text-[13.5px] text-muted">{education.institution}</span>
+                    <span className="block font-mono text-[11.5px] text-faint md:hidden">
+                      {education.start} — {education.end}
+                    </span>
                   </span>
-                </span>
-              </Track>
-            </li>
-          ))}
+                </div>
+                <Track now={now}>
+                  <span
+                    className="absolute inset-y-[8px] flex items-center overflow-hidden rounded-full"
+                    style={{
+                      left: pos(education.start),
+                      width: `calc(${pos(education.end)} - ${pos(education.start)})`,
+                      background: `repeating-linear-gradient(-45deg, color-mix(in srgb, ${color} 45%, transparent) 0 5px, transparent 5px 9px)`,
+                    }}
+                  >
+                    <span
+                      className="absolute inset-y-0 left-0 rounded-full"
+                      style={{
+                        width: `${((doneUntil - education.start) / (education.end - education.start)) * 100}%`,
+                        background: color,
+                      }}
+                    />
+                    <span className="relative hidden truncate px-3 font-mono text-[11px] text-on-inverse sm:inline">
+                      {education.start} → {education.end}
+                    </span>
+                  </span>
+                </Track>
+
+                {(education.detail || education.courses) && (
+                  <div className="flex flex-col gap-3 md:col-span-2 md:pl-[58px]">
+                    {education.detail && <p className="font-mono text-[12px] text-accent">{education.detail}</p>}
+                    {education.courses && (
+                      <div className="flex flex-wrap gap-1.5">
+                        {education.courses.map((course) => (
+                          <Tag key={course}>{course}</Tag>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                )}
+              </li>
+            )
+          })}
         </ol>
 
-        <div aria-hidden className={`${ROW} pt-2`}>
+        <div aria-hidden className={`${ROW} pt-3`}>
           <span className="hidden font-mono text-[11px] text-faint md:block">year →</span>
           <div className="relative h-5 font-mono text-[10.5px] text-faint">
             {TICKS.map((year) => (
@@ -108,7 +133,7 @@ export const Education: React.FC = () => {
             ))}
             {now !== null && (
               <span
-                className="absolute -top-0.5 -translate-x-[calc(100%+6px)] rounded-[3px] bg-accent px-1 text-[10px] text-on-inverse"
+                className="absolute -top-0.5 -translate-x-[calc(100%+6px)] rounded-full bg-accent px-1.5 text-[10px] text-on-inverse"
                 style={{ left: pos(now) }}
               >
                 now

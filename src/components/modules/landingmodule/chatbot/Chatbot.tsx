@@ -1,10 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
-import { useState, useRef, useEffect, useId } from 'react';
+import { useState, useRef, useEffect, useId, type ReactNode } from 'react';
 import Markdown from '@uiw/react-markdown-preview';
 import { motion } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
-import { Send, Lightbulb } from 'lucide-react';
+import { Send, Copy, Check } from 'lucide-react';
 import { Camera, ImagePlus, X } from 'lucide-react';
+import { useTheme } from '@hooks';
+import { Panel, Reveal, Section, SectionHeader, StatusDot } from '@elements';
 
 interface Message {
   isBot: boolean;
@@ -20,12 +22,24 @@ interface ImagePreview {
   data: string;
 }
 
+// Notebook prompt label shown beside each message.
+const Gutter = ({ children, tone }: { children: ReactNode; tone: 'in' | 'out' }) => (
+  <span
+    className={`shrink-0 pt-[3px] font-mono text-[11.5px] sm:w-[60px] sm:text-right ${
+      tone === 'in' ? 'text-accent' : 'text-series-2'
+    }`}
+  >
+    {children}
+  </span>
+);
+
 export default function ChatBot() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [showTips, setShowTips] = useState(false);
+  const { theme } = useTheme();
   const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const processedMessages = useRef<Set<string>>(new Set());
   const prevMessagesLength = useRef(0);
   const id = useId();
@@ -127,7 +141,6 @@ export default function ChatBot() {
 
   const handleTipClick = (tipText: string) => {
     setInput(tipText);
-    setShowTips(false);
     setTimeout(() => {
       (document.getElementById('chat-form') as HTMLFormElement)?.requestSubmit();
     }, 100);
@@ -223,212 +236,230 @@ export default function ChatBot() {
     }
   };
 
+  // "/" jumps to the chat from anywhere on the page (hinted on the hero button).
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const target = e.target as HTMLElement | null;
+      const typing = target?.closest('input, textarea, [contenteditable="true"]');
+      if (e.key !== '/' || typing || e.metaKey || e.ctrlKey || e.altKey) return;
+      e.preventDefault();
+      document.getElementById('chat')?.scrollIntoView({ behavior: 'smooth' });
+      inputRef.current?.focus({ preventScroll: true });
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
+
+  const isIndonesian = input.toLowerCase().startsWith('id');
+  const canSend = !isLoading && (input.trim().length > 0 || imagePreviews.length > 0);
+
+  // Jupyter-style execution counts: each question opens a new cell number.
+  let cellCount = 0;
+  const cells = messages.map((msg) => {
+    if (!msg.isBot) cellCount += 1;
+    return { msg, n: Math.max(cellCount, 1) };
+  });
+  const lastUserIndex = messages.map((m) => m.isBot).lastIndexOf(false);
+
   return (
-    <div id='chat' className="flex flex-col min-h-screen items-center justify-center gap-6 z-10 py-20 md:py-40 px-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.4 }}
-        style={{
-          backgroundImage: 'linear-gradient(to right, #348B96, #2A717A, #24475B, #24475B)',
-          boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 15px rgba(0, 0, 0, 0.2), 0 20px 25px rgba(0, 0, 0, 0.15), 0 30px 35px rgba(0, 0, 0, 0.1)`,
-          border: '2px solid #24475B',
-          borderRadius: '9999px',
-          outline: '3px solid rgba(36, 71, 91, 0.5)',
-        }}
-        className="px-6 py-3 backdrop-blur-lg relative"
-      >
-        <h1 className="text-4xl font-poppins text-white">
-          Ask Me!
-        </h1>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
-        className="relative"
-      >
-        <button
-          onClick={() => setShowTips(!showTips)}
-          className="flex items-center gap-2 px-6 py-3 bg-[#123655] text-white rounded-full hover:bg-[#1a4a6e] transition-colors"
-        >
-          <Lightbulb size={20} />
-          <span className="font-poppins">
-            {input.toLowerCase().startsWith('id') ? 'Tips Percakapan' : 'Conversation Tips'}
-          </span>
-        </button>
-
-        {showTips && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="absolute bottom-full left-0 mb-2 w-64 bg-black rounded-lg shadow-xl z-30"
+    <Section id="chat">
+      <div className="grid grid-cols-1 gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+        <Reveal className="lg:sticky lg:top-28 lg:self-start">
+          <SectionHeader
+            cell={9}
+            code={`model.generate_content(prompt)`}
+            title={
+              <>
+                Curious about me?
+                <br />
+                Just ask.
+              </>
+            }
+            description="A Gemini-powered assistant that knows my experience, projects, and skills. It answers in the language you write in."
           >
-            <div className="p-2 max-h-40 overflow-y-auto">
-              {tips.map((tip, index) => (
-                <div
-                  key={index}
-                  onClick={() => handleTipClick(input.toLowerCase().startsWith('id') ? tip.text.id : tip.text.en)}
-                  className="p-3 text-sm cursor-pointer hover:bg-gray-100 hover:text-black rounded-lg transition-colors"
-                >
-                  {input.toLowerCase().startsWith('id') ? tip.text.id : tip.text.en}
+            <div className="mt-2 w-full">
+              <p className="mb-2 font-mono text-[11.5px] text-faint">
+                {isIndonesian ? '# coba tanyakan' : '# try asking'}
+              </p>
+              <ul className="w-full border-y border-line">
+                {tips.map((tip) => {
+                  const text = isIndonesian ? tip.text.id : tip.text.en;
+                  return (
+                    <li key={tip.text.en} className="border-b border-line last:border-b-0">
+                      <button
+                        type="button"
+                        onClick={() => handleTipClick(text)}
+                        disabled={isLoading}
+                        className="group flex w-full items-center justify-between gap-4 py-3 text-left text-[14.5px] text-text transition-colors hover:text-accent disabled:opacity-50"
+                      >
+                        <span>{text.replace(/^\S+\s/, '')}</span>
+                        <span className="font-mono text-faint transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-accent">
+                          ↵
+                        </span>
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </SectionHeader>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <Panel
+            title="ask_anthony.ipynb"
+            meta={
+              <span className="flex items-center gap-2">
+                {isLoading ? <StatusDot tone="accent" /> : <span className="h-2 w-2 rounded-full border border-faint" />}
+                {isLoading ? 'busy' : 'idle'}
+              </span>
+            }
+            footer={
+              <>
+                <span>
+                  {isIndonesian ? 'tekan' : 'press'} <kbd className="rounded-[3px] border border-line px-1 text-ink">/</kbd>{' '}
+                  {isIndonesian ? 'untuk mengetik' : 'to type'}
+                </span>
+                <span className="text-faint">{cellCount} {cellCount === 1 ? 'cell' : 'cells'}</span>
+              </>
+            }
+          >
+            <div ref={containerRef} className="h-[440px] overflow-y-auto overscroll-contain">
+              {messages.length === 0 && !isLoading ? (
+                <div className="graph-paper flex h-full flex-col items-center justify-center gap-2 px-6 text-center">
+                  <p className="font-mono text-[12px] text-faint">In [ ]: # empty notebook</p>
+                  <p className="text-[14px] text-muted">
+                    {isIndonesian
+                      ? 'Pilih salah satu pertanyaan atau ketik di bawah.'
+                      : 'Pick a prompt, or type your own question below.'}
+                  </p>
                 </div>
-              ))}
-            </div>
-            <div className="p-2 text-xs text-center text-gray-500 border-t">
-              {input.toLowerCase().startsWith('id') 
-                ? "Pertanyaan akan dijawab dalam bahasa yang sama" 
-                : "Questions will be answered in your input language"}
-            </div>
-          </motion.div>
-        )}
-      </motion.div>
+              ) : (
+                <div className="space-y-4 p-4 md:p-5">
+                  {cells.map(({ msg, n }, index) => (
+                    <motion.div
+                      key={msg.id}
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex flex-col gap-1.5 sm:flex-row sm:gap-3"
+                    >
+                      <Gutter tone={msg.isBot ? 'out' : 'in'}>
+                        {msg.isBot ? `Out[${n}]:` : isLoading && index === lastUserIndex ? 'In [*]:' : `In [${n}]:`}
+                      </Gutter>
 
-      <div className="max-w-[700px] mx-auto w-full rounded-lg overflow-hidden relative 
-        before:absolute before:inset-0 before:bg-gradient-to-r before:from-[#348B96] before:to-[#24475B] 
-        before:rounded-lg before:-z-10 before:p-[2px] before:shadow-[0_0_30px_rgba(52,139,150,0.6)]">
-        
-        <div 
-          style={{
-            background: 'linear-gradient(145deg, rgba(18,54,85,0.95) 0%, rgba(36,71,91,0.95) 100%)',
-            boxShadow: 'inset 0 1px 2px rgba(255,255,255,0.1)'
-          }}
-          className="relative rounded-lg overflow-hidden"
-        >
-          <div 
-            ref={containerRef}
-            className="h-[400px] overflow-y-auto overscroll-contain"
-          >
-            <div className="p-4 space-y-4">
-              {messages.map((msg) => (
-                <motion.div
-                  key={msg.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className={`flex ${msg.isBot ? 'justify-start' : 'justify-end'}`}
-                >
-                  <div className={`p-3 pr-8 rounded-2xl max-w-[80%] break-words relative ${
-                    msg.isBot 
-                      ? 'bg-white text-gray-800 rounded-tl-none shadow-md font-poppins' 
-                      : 'bg-white text-gray-800 rounded-tr-none shadow-md font-poppins'
-                  }`}>
-                     {msg.images && msg.images.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mb-2">
-                        {msg.images.map((img, index) => (
-                          <img
-                            key={index}
-                            src={img}
-                            alt="Uploaded content"
-                            className="w-16 h-16 object-cover rounded-lg border border-gray-200"
+                      <div className="group/cell relative min-w-0 flex-1">
+                        <div
+                          className={`break-words rounded-[6px] text-[14px] leading-relaxed ${
+                            msg.isBot ? 'px-0.5 py-0.5 text-text' : 'border border-line bg-well px-3 py-2 text-ink'
+                          }`}
+                        >
+                          {msg.images && msg.images.length > 0 && (
+                            <div className="mb-2 flex flex-wrap gap-2">
+                              {msg.images.map((img, imgIndex) => (
+                                <img
+                                  key={imgIndex}
+                                  src={img}
+                                  alt="Uploaded content"
+                                  className="h-16 w-16 rounded-[6px] border border-line object-cover"
+                                />
+                              ))}
+                            </div>
+                          )}
+
+                          {msg.text && (
+                            <Markdown
+                              source={msg.text}
+                              wrapperElement={{ 'data-color-mode': theme }}
+                              style={{
+                                background: 'transparent',
+                                color: 'inherit',
+                                fontFamily: 'inherit',
+                                fontSize: 14,
+                              }}
+                            />
+                          )}
+
+                          {msg.isBot && msg.text.length < (msg.fullText?.length || 0) && (
+                            <span className="ml-0.5 inline-block h-3.5 w-[7px] translate-y-[2px] animate-blink bg-accent" />
+                          )}
+                        </div>
+
+                        {msg.isBot && (
+                          <button
+                            type="button"
+                            onClick={() => handleCopy(msg.id)}
+                            className="mt-1 flex items-center gap-1.5 font-mono text-[11px] text-faint transition-colors hover:text-ink"
+                            aria-label={isIndonesian ? 'Salin pesan' : 'Copy message'}
+                          >
+                            {msg.showCopied ? <Check size={12} /> : <Copy size={12} />}
+                            {msg.showCopied ? (isIndonesian ? 'tersalin' : 'copied') : isIndonesian ? 'salin' : 'copy'}
+                          </button>
+                        )}
+                      </div>
+                    </motion.div>
+                  ))}
+
+                  {isLoading && (
+                    <div className="flex flex-col gap-1.5 sm:flex-row sm:gap-3">
+                      <Gutter tone="out">{`Out[${Math.max(cellCount, 1)}]:`}</Gutter>
+                      <div className="flex items-center gap-1.5 py-2">
+                        {[0, 0.2, 0.4].map((delay) => (
+                          <motion.span
+                            key={delay}
+                            className="h-1.5 w-1.5 rounded-full bg-accent"
+                            animate={{ opacity: [0.25, 1, 0.25] }}
+                            transition={{ duration: 1, repeat: Infinity, delay }}
                           />
                         ))}
                       </div>
-                    )}
-                    
-                    {msg.text && <Markdown source={msg.text} />}
-                    
-                    <button
-                      onClick={() => handleCopy(msg.id)}
-                      className={`absolute bottom-1 right-1 p-1 rounded-full hover:bg-opacity-20 transition-colors ${
-                        msg.isBot 
-                          ? 'text-gray-600 hover:bg-gray-200' 
-                          : 'text-gray-600 hover:bg-gray-700'
-                      }`}
-                      aria-label="Salin pesan"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                      </svg>
-                    </button>
-
-                    {msg.showCopied && (
-                      <motion.span
-                        initial={{ opacity: 0, y: 5 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 5 }}
-                        className="absolute -bottom-5 right-1 text-xs bg-gray-700 text-white px-2 py-1 rounded"
-                      >
-                        {input.toLowerCase().startsWith('id') ? 'Tersalin!' : 'Copied!'}
-                      </motion.span>
-                    )}
-
-                    {msg.isBot && msg.text.length < (msg.fullText?.length || 0) && (
-                      <span className="inline-block ml-1 h-3 w-[2px] bg-gray-500 animate-pulse" />
-                    )}
-                  </div>
-                </motion.div>
-              ))}
-              
-              {isLoading && (
-                <div className="flex justify-start">
-                  <div className="bg-gray-200 rounded-2xl rounded-tl-none p-2">
-                    <div className="flex space-x-2">
-                      <motion.div
-                        className="w-2 h-2 bg-gray-400 rounded-full"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 1, repeat: Infinity }}
-                      />
-                      <motion.div
-                        className="w-2 h-2 bg-gray-400 rounded-full"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
-                      />
-                      <motion.div
-                        className="w-2 h-2 bg-gray-400 rounded-full"
-                        animate={{ scale: [1, 1.2, 1] }}
-                        transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
-                      />
                     </div>
-                  </div>
+                  )}
                 </div>
               )}
             </div>
-          </div>
 
-          <form 
-            id="chat-form"
-            onSubmit={handleSubmit}
-            className="flex flex-col p-4 bg-white/10 border-t border-[#348B96]/30"
-          >
-            {imagePreviews.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-2">
-                {imagePreviews.map((img) => (
-                  <div key={img.id} className="relative group">
-                    <img 
-                      src={img.data} 
-                      alt="Preview" 
-                      className="w-16 h-16 object-cover rounded-lg border border-gray-200"
-                    />
-                    <button
-                      type="button"
-                      onClick={() => removeImagePreview(img.id)}
-                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-0.5 
-                        opacity-0 group-hover:opacity-100 transition-opacity"
-                    >
-                      <X size={16} />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            )}
+            <form id="chat-form" onSubmit={handleSubmit} className="border-t border-line bg-well p-3">
+              {imagePreviews.length > 0 && (
+                <div className="mb-2 flex flex-wrap gap-2">
+                  {imagePreviews.map((img) => (
+                    <div key={img.id} className="group relative">
+                      <img src={img.data} alt="Preview" className="h-16 w-16 rounded-[6px] border border-line object-cover" />
+                      <button
+                        type="button"
+                        onClick={() => removeImagePreview(img.id)}
+                        className="absolute -right-2 -top-2 rounded-full bg-inverse p-0.5 text-on-inverse opacity-0 transition-opacity group-hover:opacity-100"
+                        aria-label="Remove image"
+                      >
+                        <X size={14} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
 
-            <div className="flex gap-2 flex-nowrap">
-                <label className="relative group p-1 md:p-2 rounded-full hover:bg-gray-400 transition-colors shrink-0 bg-gray-400 cursor-not-allowed">
+              <div className="flex items-center gap-2">
+                <span className="hidden w-[52px] shrink-0 text-right font-mono text-[11.5px] text-accent sm:block">In [ ]:</span>
+
+                <label
+                  className="flex h-10 w-10 shrink-0 cursor-not-allowed items-center justify-center rounded-[8px] border border-line bg-surface text-faint opacity-50"
+                  title={isIndonesian ? 'Unggah gambar segera hadir' : 'Image upload coming soon'}
+                >
                   <input
                     type="file"
                     accept="image/*"
                     multiple
-                    disabled 
+                    disabled
                     onChange={handleImageUpload}
                     className="hidden"
                     aria-label="Upload image"
                   />
-                  <ImagePlus className="w-5 h-5 md:w-6 md:h-6 text-gray-600" />
+                  <ImagePlus size={16} />
                 </label>
 
-                <label className="p-1 md:p-2 rounded-full hover:bg-gray-400 transition-colors shrink-0 md:hidden bg-gray-400 cursor-not-allowed">
+                <label
+                  className="flex h-10 w-10 shrink-0 cursor-not-allowed items-center justify-center rounded-[8px] border border-line bg-surface text-faint opacity-50 md:hidden"
+                  title={isIndonesian ? 'Kamera segera hadir' : 'Camera coming soon'}
+                >
                   <input
                     type="file"
                     accept="image/*"
@@ -438,43 +469,39 @@ export default function ChatBot() {
                     aria-label="Take photo"
                     disabled={true}
                   />
-                  <Camera className="w-5 h-5 md:w-6 md:h-6 text-gray-600" />
+                  <Camera size={16} />
                 </label>
 
                 <input
+                  ref={inputRef}
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder={input.toLowerCase().startsWith('id') ? "Tanyakan..." : "Ask me..."}
-                  className="flex-1 p-2 mr-2 border border-gray-200 rounded-full focus:outline-none focus:ring-2 focus:ring-[#123655] text-gray-800 bg-white/90 text-sm md:text-base min-w-0"
+                  placeholder={isIndonesian ? 'Tanyakan sesuatu…' : 'Ask me anything…'}
+                  className="h-10 min-w-0 flex-1 rounded-[8px] border border-line-strong bg-surface px-3 text-[14px] text-ink placeholder:text-faint focus:border-accent focus:outline-none"
                   aria-label="Chat input"
                 />
 
                 <button
                   type="submit"
-                  disabled={isLoading || (!input.trim() && imagePreviews.length === 0)}
-                  className={`relative group p-2 md:p-3 text-white rounded-full transition-colors shrink-0 ${
-                    isLoading || (!input.trim() && imagePreviews.length === 0)
-                      ? 'bg-gray-400 cursor-not-allowed'
-                      : 'bg-[#123655] hover:bg-[#1a4a6e] cursor-pointer'
-                  }`}
+                  disabled={!canSend}
+                  title={
+                    !canSend && !isLoading
+                      ? isIndonesian
+                        ? 'Silakan masukkan pesan terlebih dahulu'
+                        : 'Please enter a message first'
+                      : undefined
+                  }
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[8px] bg-inverse text-on-inverse transition-colors hover:bg-accent disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-inverse"
                   aria-label="Send message"
                 >
-                  <Send className="w-5 h-5 md:w-6 md:h-6" />
-                  
-                  {/* Tooltip untuk disabled state */}
-                  {(isLoading || (!input.trim() && imagePreviews.length === 0)) && (
-                    <div className="hidden group-hover:block absolute bottom-full right-0 mb-2 px-3 py-1 text-sm bg-gray-700 text-white rounded-lg shadow-lg">
-                      {input.toLowerCase().startsWith('id') 
-                        ? "Silakan masukkan pesan terlebih dahulu" 
-                        : "Please enter a message first"}
-                    </div>
-                  )}
+                  <Send size={16} />
                 </button>
               </div>
-          </form>
-        </div>
+            </form>
+          </Panel>
+        </Reveal>
       </div>
-    </div>
+    </Section>
   );
 }

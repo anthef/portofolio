@@ -1,16 +1,21 @@
 import { IconType } from 'react-icons'
 import {
+  SiClickhouse,
   SiDjango,
-  SiDocker,
-  SiFirebase,
   SiFlutter,
-  SiMongodb,
+  SiGo,
+  SiGooglecloud,
+  SiNestjs,
   SiNextdotjs,
   SiNodedotjs,
+  SiPostgresql,
   SiPython,
+  SiPytorch,
   SiReact,
-  SiTailwindcss,
+  SiSpringboot,
+  SiStreamlit,
   SiTensorflow,
+  SiTerraform,
   SiTypescript,
 } from 'react-icons/si'
 import { Ahli } from '.'
@@ -23,18 +28,23 @@ export interface StackItem {
   hover?: string
 }
 
-// Monochrome logo strip shown under the hero.
+// Tech stack shown under the hero, following the CV's skills section.
 export const STACK: StackItem[] = [
   { skill: Ahli.Python, icon: SiPython },
+  { skill: Ahli.TypeScript, icon: SiTypescript },
+  { skill: Ahli.Golang, icon: SiGo },
+  { skill: Ahli.PyTorch, icon: SiPytorch },
   { skill: Ahli.TensorFlow, icon: SiTensorflow },
   { skill: Ahli.NextJS, icon: SiNextdotjs, hover: 'var(--ink)' },
   { skill: Ahli.React, icon: SiReact },
-  { skill: Ahli.TypeScript, icon: SiTypescript },
   { skill: Ahli.NodeJS, icon: SiNodedotjs },
+  { skill: Ahli.NestJS, icon: SiNestjs },
   { skill: Ahli.Django, icon: SiDjango, hover: '#44B78B' },
+  { skill: Ahli.SpringBoot, icon: SiSpringboot },
   { skill: Ahli.Flutter, icon: SiFlutter },
-  { skill: Ahli.Docker, icon: SiDocker },
-  { skill: Ahli.MongoDB, icon: SiMongodb },
-  { skill: Ahli.Firebase, icon: SiFirebase },
-  { skill: Ahli.TailwindCSS, icon: SiTailwindcss },
+  { skill: Ahli.Streamlit, icon: SiStreamlit },
+  { skill: Ahli.PostgreSQL, icon: SiPostgresql },
+  { skill: Ahli.ClickHouse, icon: SiClickhouse },
+  { skill: Ahli.GCP, icon: SiGooglecloud },
+  { skill: Ahli.Terraform, icon: SiTerraform },
 ]

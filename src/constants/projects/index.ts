@@ -2,6 +2,54 @@ import { Ahli } from '../Skills'
 
 export const PROJECTS = [
   {
+    name: 'cmx — Cloud Machines for AI Agents',
+    image: 'cmx.webp',
+    date: 'Sep 2026 - Present',
+    role: 'Founder',
+    description:
+      'Founded cmx, backed by Y Combinator: always-on cloud machines that run AI agents and dev work 24/7, with a browser terminal that feels local, a CLI with port forwarding and SSH, and preview links for dev servers.',
+    links: [
+      {
+        name: 'Website',
+        link: 'https://cmx.sh',
+      },
+    ],
+    type: 'SE',
+    skills: [Ahli.Golang, Ahli.TypeScript, Ahli.React],
+  },
+  {
+    name: 'OpenScale — AI Inference',
+    image: 'openscale.webp',
+    date: 'Jun 2026 - Present',
+    role: 'Founder',
+    description:
+      'Founded OpenScale, backed by Y Combinator: AI inference for open-source models — fast and low-cost, through one OpenAI-compatible API.',
+    links: [
+      {
+        name: 'Website',
+        link: 'https://openscale.so',
+      },
+    ],
+    type: 'SE',
+    skills: [Ahli.TypeScript, Ahli.React, Ahli.PostgreSQL, Ahli.GCP, Ahli.Terraform],
+  },
+  {
+    name: 'Hyrpilot — AI Job Application Agent',
+    image: 'hyrpilot.webp',
+    date: 'Mar 2026 - Present',
+    role: 'Founder',
+    description:
+      'Founded Hyrpilot, an AI agent that helps Indonesian fresh graduates get hired faster: it matches jobs to your CV, tailors your CV and cover letter for each one, and tracks every application in one place.',
+    links: [
+      {
+        name: 'Website',
+        link: 'https://hyrpilot.com',
+      },
+    ],
+    type: 'SE',
+    skills: [Ahli.NextJS, Ahli.TypeScript, Ahli.PostgreSQL, Ahli.Python, Ahli.GCP],
+  },
+  {
     name: 'BaKu Website',
     date: '2025',
     description:

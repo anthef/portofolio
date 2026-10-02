@@ -7,6 +7,8 @@ export interface ProjectType {
     description?: string
     links?: LinkType[]
     type: 'AI' | 'SE' | 'All'
+    // Set when Anthony started the product, e.g. 'Founder'.
+    role?: string
     skills : SkillSet[]
     collaborators?: Collaborator[]
     

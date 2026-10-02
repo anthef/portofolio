@@ -6,7 +6,7 @@ const activeSessions = new Map<string, boolean>();
 
 const PROFESSIONAL_CONTEXT = `
 **Professional Background**:
-Self-driven Computer Science student at Universitas Indonesia and full-time software engineer with hands-on experience in LLM systems, machine learning, and large-scale software development. Currently building multi-tenant AI infrastructure in production — a per-tenant ontology engine, a multi-provider LLM agent runtime, and multi-modal computer vision systems — alongside a track record in data science competitions and teaching. Interested in Software Engineering, AI/LLM Engineering, Data Science, and Business Intelligence.
+Self-driven Computer Science student at Universitas Indonesia and full-time software engineer with hands-on experience in LLM systems, machine learning, and large-scale software development. Currently building multi-tenant AI infrastructure in production — a per-tenant ontology engine, a multi-provider LLM agent runtime, and multi-modal computer vision systems — alongside a track record in data science competitions and teaching. Founder of cmx and OpenScale (both backed by Y Combinator) and Hyrpilot. Interested in Software Engineering, AI/LLM Engineering, Data Science, and Business Intelligence.
 
 **Technical Skills**:
 - Areas: Machine Learning, Deep Learning, Data Mining, Software Engineering, LLM Engineering, Computer Vision, Accounting, Project Management
@@ -14,6 +14,11 @@ Self-driven Computer Science student at Universitas Indonesia and full-time soft
 - Frameworks: TensorFlow, PyTorch, Django, Node.js, Next.js, React, React Native, Effect-TS, Spring Boot, Flutter, Bootstrap 5, NestJS, Streamlit
 - Data & Infra: PostgreSQL, ClickHouse, GCP (Cloud Run, Pub/Sub, Cloud Tasks), Terraform, MCP, Langfuse
 - Languages: Indonesian (native), English (EPT 640/677, proficient)
+
+**Founder**:
+- cmx (Sep 2026–Present, backed by Y Combinator, https://cmx.sh) — always-on cloud Linux machines for running AI agents and dev work 24/7: a browser terminal that feels local and survives disconnects, a Go single-binary CLI (port forwarding, SSH), preview links, and a live desktop stream
+- OpenScale (Jun 2026–Present, backed by Y Combinator, https://openscale.so) — AI inference for open-source models, fast and low-cost, through one OpenAI-compatible API
+- Hyrpilot (Mar 2026–Present, https://hyrpilot.com) — AI job-application agent for Indonesian fresh graduates: CV-based job matching, tailored CVs and cover letters, a Chrome extension that auto-fills applications, and an application tracker
 
 **Work Experience**:
 - Software Engineer (AI / LLM Engineer) @ Latent Space (Halo AI) — Apr 2026–Present, on-site

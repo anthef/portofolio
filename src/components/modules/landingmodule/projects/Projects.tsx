@@ -29,6 +29,7 @@ const ProjectRow: React.FC<{ project: Project; index: number; flip: boolean }> =
   const [expanded, setExpanded] = useState(false)
   const { name, date, description, skills, links, type } = project
   const collaborators = 'collaborators' in project ? project.collaborators : undefined
+  const role = 'role' in project ? project.role : undefined
 
   return (
     <article className="group grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
@@ -39,7 +40,8 @@ const ProjectRow: React.FC<{ project: Project; index: number; flip: boolean }> =
           <span className="font-display text-[64px] leading-[0.8] text-line-strong transition-colors duration-500 group-hover:text-accent md:text-[80px]">
             {String(index + 1).padStart(2, '0')}
           </span>
-          <span className="pb-1 font-mono text-[11.5px] text-faint">
+          <span className="flex flex-wrap items-center gap-2 pb-1 font-mono text-[11.5px] text-faint">
+            {role && <span className="rounded-full bg-accent-soft px-2.5 py-0.5 text-accent">{role.toLowerCase()}</span>}
             {TYPE_LABEL[type] ?? type} · {date}
           </span>
         </div>

@@ -13,7 +13,7 @@ export const EDUCATION: EducationType[] = [
     title: 'Bachelor of Computer Science',
     institution: 'Universitas Indonesia Fakultas Ilmu Komputer',
     image: '/educations/kuliah1.png',
-    detail: 'cGPA 4.00 / 4.00 · Aug 2023 – Feb 2027 (expected)',
+    detail: 'Aug 2023 – Feb 2027 (expected)',
     courses: [
       'Introduction to AI & Data Science',
       'Image Processing',

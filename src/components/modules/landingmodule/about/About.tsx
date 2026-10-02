@@ -52,7 +52,6 @@ const currentRoles = EXPERIENCES.Work.flatMap((experience) =>
 )
 
 const university = EDUCATION[0]
-const gpa = university.detail?.match(/cGPA ([\d.]+ \/ [\d.]+)/)?.[1]
 
 const STATS = [
   { key: 'awards', value: ACHIEVEMENTS.length },
@@ -161,7 +160,7 @@ export const About: React.FC = () => {
 
                 <Reveal onLoad delay={0.15}>
                   <p className="mt-6 max-w-[520px] text-[16px] leading-relaxed text-muted md:text-[17px]">
-                    Computer Science student at Universitas Indonesia (cGPA 4.00) and full-time software engineer —
+                    Computer Science student at Universitas Indonesia and full-time software engineer —
                     building LLM systems, machine learning, and large-scale software in production.
                   </p>
                 </Reveal>
@@ -207,7 +206,7 @@ export const About: React.FC = () => {
                     className="object-cover object-top"
                   />
                 </div>
-                {gpa && <Annotation className="left-0 top-4 sm:-left-12">cgpa = {gpa}</Annotation>}
+                <Annotation className="left-0 top-4 sm:-left-12">projects = {PROJECTS.length}</Annotation>
                 <Annotation flip className="right-0 top-[34%] sm:-right-14">
                   awards = {ACHIEVEMENTS.length}
                 </Annotation>

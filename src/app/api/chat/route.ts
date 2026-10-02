@@ -6,7 +6,7 @@ const activeSessions = new Map<string, boolean>();
 
 const PROFESSIONAL_CONTEXT = `
 **Professional Background**:
-Self-driven Computer Science student at Universitas Indonesia (cGPA 4.00/4.00) and full-time software engineer with hands-on experience in LLM systems, machine learning, and large-scale software development. Currently building multi-tenant AI infrastructure in production — a per-tenant ontology engine, a multi-provider LLM agent runtime, and multi-modal computer vision systems — alongside a track record in data science competitions and teaching. Interested in Software Engineering, AI/LLM Engineering, Data Science, and Business Intelligence.
+Self-driven Computer Science student at Universitas Indonesia and full-time software engineer with hands-on experience in LLM systems, machine learning, and large-scale software development. Currently building multi-tenant AI infrastructure in production — a per-tenant ontology engine, a multi-provider LLM agent runtime, and multi-modal computer vision systems — alongside a track record in data science competitions and teaching. Interested in Software Engineering, AI/LLM Engineering, Data Science, and Business Intelligence.
 
 **Technical Skills**:
 - Areas: Machine Learning, Deep Learning, Data Mining, Software Engineering, LLM Engineering, Computer Vision, Accounting, Project Management
@@ -62,7 +62,7 @@ Self-driven Computer Science student at Universitas Indonesia (cGPA 4.00/4.00) a
 - K-Means clustering of Jakarta flood management effectiveness, 2015–2017 vs 2018–2020 (2023)
 
 **Education**:
-- Bachelor of Computer Science, Universitas Indonesia — Aug 2023–Feb 2027 (expected), cGPA 4.00/4.00
+- Bachelor of Computer Science, Universitas Indonesia — Aug 2023–Feb 2027 (expected)
   - Courses: Intro to AI & Data Science, Image Processing, Semantic Web, Data Mining, Database, Software Engineering, Spoken Language Processing
 - SMAN 28 Jakarta (2020–2023) — ranked 2nd in graduating class (MIPA); Robotics Club Head of Equipment and Mechanical
 

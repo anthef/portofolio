@@ -59,6 +59,16 @@ const config: Config = {
           from: { opacity: "0", transform: "scale(0.2)" },
           to: { opacity: "1", transform: "scale(1)" },
         },
+        // 3D float for objects inside a preserve-3d scene.
+        bob: {
+          "0%, 100%": { transform: "translateZ(0)" },
+          "50%": { transform: "translateZ(7px)" },
+        },
+        // Moves along a straight path set per element via --fx/--fy → --tx/--ty.
+        travel: {
+          from: { transform: "translate3d(var(--fx), var(--fy), 0)" },
+          to: { transform: "translate3d(var(--tx), var(--ty), 0)" },
+        },
       },
       animation: {
         blink: "blink 1.1s step-end infinite",
@@ -67,6 +77,8 @@ const config: Config = {
         float: "float 6s ease-in-out infinite",
         orbit: "spin 40s linear infinite",
         pop: "pop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both",
+        bob: "bob 4.5s ease-in-out infinite",
+        travel: "travel 3.2s linear infinite",
       },
     },
   },

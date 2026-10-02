@@ -6,14 +6,12 @@ import {
   Arrow,
   Blob,
   Button,
-  ClusterField,
-  ClusterStats,
   Code,
   MarginLine,
-  Plot,
   Reveal,
   StatusDot,
 } from '@elements'
+import { EmbeddingMap } from './EmbeddingMap'
 
 const ROLES = ['AI / LLM Engineer', 'Software Engineer', 'Data Scientist']
 
@@ -110,7 +108,6 @@ const Prompt: React.FC<{ n: number; className?: string }> = ({ n, className = ''
 
 export const About: React.FC = () => {
   const typed = useTypewriter(ROLES)
-  const [stats, setStats] = useState<ClusterStats>({ iter: 0, inertia: 0, converged: false })
   const [now] = currentRoles
 
   return (
@@ -183,30 +180,7 @@ export const About: React.FC = () => {
               </div>
 
               <Reveal onLoad delay={0.2}>
-                <div className="mb-4 flex flex-wrap items-center justify-between gap-3 pl-[34px]">
-                  <span className="card-shadow rounded-full bg-surface px-3.5 py-1.5 text-[12px]">
-                    <Code>KMeans(n_clusters=3).fit(X)</Code>
-                  </span>
-                  <span className="flex items-center gap-1.5 font-mono text-[11px] text-faint">
-                    <StatusDot /> live
-                  </span>
-                </div>
-                <div className="aspect-[5/4] w-full">
-                  <Plot xTicks={['0.0', '0.25', '0.5', '0.75', '1.0']} yTicks={['0.0', '0.5', '1.0']} className="h-full">
-                    <ClusterField onStats={setStats} />
-                  </Plot>
-                </div>
-                <div className="mt-5 flex flex-wrap gap-2 pl-[34px] font-mono text-[11.5px]">
-                  <span className="rounded-full bg-well px-3 py-1 text-muted">
-                    iter <span className="text-ink">{String(stats.iter).padStart(2, '0')}</span>
-                  </span>
-                  <span className="rounded-full bg-well px-3 py-1 text-muted">
-                    inertia <span className="text-ink">{stats.inertia.toFixed(1)}</span>
-                  </span>
-                  <span className={`rounded-full px-3 py-1 ${stats.converged ? 'bg-accent-soft text-live' : 'bg-well text-faint'}`}>
-                    {stats.converged ? '✓ converged' : '… fitting'}
-                  </span>
-                </div>
+                <EmbeddingMap />
               </Reveal>
             </div>
           </div>

@@ -55,6 +55,10 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-6px)" },
         },
+        pop: {
+          from: { opacity: "0", transform: "scale(0.2)" },
+          to: { opacity: "1", transform: "scale(1)" },
+        },
       },
       animation: {
         blink: "blink 1.1s step-end infinite",
@@ -62,6 +66,7 @@ const config: Config = {
         rise: "rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both",
         float: "float 6s ease-in-out infinite",
         orbit: "spin 40s linear infinite",
+        pop: "pop 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both",
       },
     },
   },

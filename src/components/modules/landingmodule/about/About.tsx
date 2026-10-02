@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
-import { ACHIEVEMENTS, EDUCATION, EXPERIENCES, PROJECTS, STACK } from '@constants'
+import { ACHIEVEMENTS, EDUCATION, EXPERIENCES, PROJECTS, STACK, STACK_LAYERS } from '@constants'
 import {
   Arrow,
   Blob,
@@ -12,6 +12,7 @@ import {
   StatusDot,
 } from '@elements'
 import { EmbeddingMap } from './EmbeddingMap'
+import { StackTower } from './StackTower'
 
 const ROLES = ['AI / LLM Engineer', 'Software Engineer', 'Data Scientist']
 
@@ -277,33 +278,19 @@ export const About: React.FC = () => {
             </div>
           </div>
 
-          {/* In [3]: stack as a loose cloud of pills */}
+          {/* In [3]: the stack as an exploded tower of layers */}
           <div className="nb-gutter mt-28 pb-8 md:mt-36">
             <Prompt n={3} className="mb-3" />
             <Reveal>
               <p className="flex flex-wrap items-baseline justify-between gap-3 text-[12.5px]">
                 <Code>from anthony import stack</Code>
-                <span className="font-mono text-[11.5px] text-faint"># {STACK.length} modules loaded</span>
+                <span className="font-mono text-[11.5px] text-faint">
+                  # {STACK.length} modules in {STACK_LAYERS.length} layers
+                </span>
               </p>
-              <ul aria-label="Tech stack" className="mt-7 flex flex-wrap gap-x-2.5 gap-y-3">
-                {STACK.map(({ skill, icon: Icon, hover }, index) => (
-                  <li key={skill.name} className="animate-float" style={{ animationDelay: `${(index % 7) * -0.85}s` }}>
-                    <a
-                      href={skill.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="card-shadow group flex h-11 items-center gap-2.5 rounded-full bg-surface pl-3.5 pr-4 transition-transform duration-300 ease-out hover:-translate-y-0.5"
-                      style={{ '--brand': hover ?? skill.color } as React.CSSProperties}
-                    >
-                      <Icon
-                        size={17}
-                        className="shrink-0 text-muted transition-colors duration-300 group-hover:text-[var(--brand)]"
-                      />
-                      <span className="text-[14px] text-ink">{skill.name}</span>
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <div className="mt-6">
+                <StackTower />
+              </div>
             </Reveal>
           </div>
         </div>
